@@ -1,3 +1,10 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<SDL/SDL.h>
+#include<SDL/SDL_ttf.h>
+
 /** Structure definissant une case noire */
 typedef struct blackTile{
 	int isLibre;

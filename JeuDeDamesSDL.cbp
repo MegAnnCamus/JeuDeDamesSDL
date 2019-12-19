@@ -52,6 +52,8 @@
 		<Unit filename="gestionAffichage.cpp" />
 		<Unit filename="gestionAffichage.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="structuresLogiques.h" />
+		<Unit filename="structuresSDL.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

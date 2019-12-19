@@ -3,8 +3,8 @@
 #include<math.h>
 #include<string.h>
 #include<SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
-#include "constantes.h"
+#include<SDL/SDL_ttf.h>
+#include"constantes.h"
 
 /*void affichePions(casePlateau plateau[TAILLE_PLATEAU][TAILLE_PLATEAU],SDL_Surface *ecran) {
 

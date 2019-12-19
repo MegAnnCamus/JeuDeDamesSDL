@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1576752327 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1576756669 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -203,7 +203,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1576752265 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
+1576755977 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
 1576752336 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
@@ -214,7 +214,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1576752300 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1576756670 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -222,4 +222,22 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 	"constantes.h"
+
+1576759833 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+	"constantes.h"
+	"structuresLogiques.h"
+
+1576758546 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
 
