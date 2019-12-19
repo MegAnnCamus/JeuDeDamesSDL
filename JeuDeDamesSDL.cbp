@@ -49,9 +49,13 @@
 		</Linker>
 		<Unit filename="cb.bmp" />
 		<Unit filename="constantes.h" />
+		<Unit filename="deplacement.cpp" />
+		<Unit filename="deplacement.h" />
 		<Unit filename="gestionAffichage.cpp" />
 		<Unit filename="gestionAffichage.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="plateau.cpp" />
+		<Unit filename="plateau.h" />
 		<Unit filename="structuresLogiques.h" />
 		<Unit filename="structuresSDL.h" />
 		<Extensions>

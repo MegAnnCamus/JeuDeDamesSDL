@@ -33,12 +33,12 @@ plateau initPlateau(joueur j1, joueur j2){
 		c.x = x;c.y = y;
 
 		if (i <= 20) { //Côté noir : haut du plateau
-			c.isLibre = 0;
+			c.isLibre = FALSE;
 			pion.couleur = NOIR;
 			pion.isHighlighted = FALSE;
 			c.pion = pion;
 		} else if (i > 30) { //Côté blanc : bas du plateau
-			c.isLibre = 0;
+			c.isLibre = FALSE;
 			pion.couleur = BLANC;
 			pion.isHighlighted = FALSE;
 			c.pion = pion;

@@ -5,98 +5,138 @@
 #include<SDL/SDL.h>
 #include<SDL/SDL_ttf.h>
 #include"constantes.h"
+#include"structuresLogiques.h"
+#include"structuresSDL.h"
 
-/*void affichePions(casePlateau plateau[TAILLE_PLATEAU][TAILLE_PLATEAU],SDL_Surface *ecran) {
+extern blackTile caseNoir;
+extern whiteTile caseBlanc;
+extern whiteTile caseHighlight;
+extern whitePawn pionBlanc;
+extern blackPawn pionNoir;
+extern plateau plateauDeJeu;
 
-    int i,j ;
-    SDL_Rect position;
-    SDL_Surface *pionNoir = NULL, *pionBlanc = NULL, *dameBlanc = NULL, *dameNoir = NULL;
+void gestionEvenements(SDL_Surface *ecran)
+{
+    int continuer = 1;
+    SDL_Event event;
+    casePlateau *caseCliquee;
 
-    //Chargement images des pions
-    pionNoir = SDL_LoadBMP("./img/pions/pionBlanc.bmp");
-    SDL_SetColorKey(pionNoir, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir->format, 255, 255, 255));
-    pionBlanc = SDL_LoadBMP("./img/pions/pionNoir.bmp");
-    SDL_SetColorKey(pionBlanc, SDL_SRCCOLORKEY, SDL_MapRGB(pionBlanc->format, 255, 255, 255));
-    dameNoir = SDL_LoadBMP("./img/pions/dameNoir.bmp");
-    SDL_SetColorKey(dameNoir, SDL_SRCCOLORKEY, SDL_MapRGB(dameNoir->format, 255, 255, 255));
-    dameBlanc = SDL_LoadBMP("./img/pions/dameBlanc.bmp");
-    SDL_SetColorKey(dameBlanc, SDL_SRCCOLORKEY, SDL_MapRGB(dameBlanc->format, 255, 255, 255));
-    for(i=0 ;i<TAILLE_PLATEAU ;i++){
-        for(j=0 ;j<TAILLE_PLATEAU ;j++) {
-            position.x = ((j+1)*TAILLE_CASE)-58;
-            position.y = ((i+1)*TAILLE_CASE)-58;
-            switch(plateau[i][j].type) {
-                case PION_BLANC :
-                    fprintf(stdout," %c ",plateau[i][j].type);
-                    SDL_BlitSurface(pionBlanc, NULL, ecran, &position);
-                    break ;
-                case PION_NOIR :
-                    fprintf(stdout," %c ",plateau[i][j].type);
-                    SDL_BlitSurface(pionNoir, NULL, ecran, &position);
-                    break ;
-                case DAME_NOIR :
-                    fprintf(stdout," %c ",plateau[i][j].type);
-                    SDL_BlitSurface(dameNoir, NULL, ecran, &position);
-                    break ;
-                case DAME_BLANC :
-                    fprintf(stdout," %c ",plateau[i][j].type);
-                    SDL_BlitSurface(dameBlanc, NULL, ecran, &position);
-                    break ;
-                default :
-                    break ;
-            }
-            if(j==9)
-                fprintf(stdout,"\n");
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+                break;
         }
+
+        SDL_Flip(ecran);
     }
 }
 
-int affichePlateauSDL(casePlateau plateau[TAILLE_PLATEAU][TAILLE_PLATEAU],SDL_Surface *ecran){
+void affichePlateauSDL(SDL_Surface* ecran){
 
-    SDL_Surface *cases[2] = {NULL};
-    SDL_Rect position;
-    int i = 1;
-    int j = 1;
     ecran = SDL_SetVideoMode(TAILLE_ECRAN, TAILLE_ECRAN, 32, SDL_HWSURFACE);
-    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 243, 235, 215));
+	caseNoir.surface = SDL_LoadBMP("./img/cases/caseNoir.bmp");
+	caseHighlight.surface = SDL_LoadBMP("./img/cases/caseHighlight.bmp");
 
-    //case blanche
-    cases[0] = SDL_CreateRGBSurface(SDL_HWSURFACE, TAILLE_CASE, TAILLE_CASE, 32, 0, 0, 0, 0);
-    SDL_FillRect(cases[0], NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
-    //case noire
-    cases[1] = SDL_CreateRGBSurface(SDL_HWSURFACE, TAILLE_CASE, TAILLE_CASE, 32, 0, 0, 0, 0);
-    SDL_FillRect(cases[1], NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
+	for(int i=1;i<=50;i++){
 
-    for(j = 0 ; j < TAILLE_PLATEAU ; j++){
-        for(i = 0 ; i < TAILLE_PLATEAU  ; i++){
-            //TODO : print pions
-            position.x = (i) * TAILLE_CASE;
-            position.y = (j) * TAILLE_CASE;
+        //Affichage des cases du plateau
+        if(plateauDeJeu.cases[i].isHighlighted == FALSE){
+            caseNoir.position.x = (plateauDeJeu.cases[i].x - 1) * TAILLE_CASE;
+            caseNoir.position.y = (plateauDeJeu.cases[i].y - 1) * TAILLE_CASE;
+            SDL_BlitSurface(caseNoir.surface, NULL, ecran, &caseNoir.position);
+		}
+		else {
+            caseHighlight.position.x = (plateauDeJeu.cases[i].x - 1) * TAILLE_CASE;
+			caseHighlight.position.y = (plateauDeJeu.cases[i].y - 1) * TAILLE_CASE;
+			SDL_BlitSurface(caseHighlight.surface, NULL, ecran, &caseHighlight.position);
+		}
 
-            if ( (i+j) % 2 == 1 )
-            {
-                SDL_BlitSurface(cases[1], NULL, ecran, &position);
-            }
-            else
-            {
-                SDL_BlitSurface(cases[0], NULL, ecran, &position);
-            }
-        }
-    }
+		pionBlanc.position.x = (plateauDeJeu.cases[i].x - 1) * TAILLE_CASE + 2;
+        pionBlanc.position.y = (plateauDeJeu.cases[i].y - 1) * TAILLE_CASE + 2;
+        pionNoir.position.x = (plateauDeJeu.cases[i].x - 1) * TAILLE_CASE + 2;
+        pionNoir.position.y = (plateauDeJeu.cases[i].y - 1) * TAILLE_CASE + 2;
 
-    affichePions(plateau,ecran);
+        //Affichage des pions
+        if(plateauDeJeu.cases[i].isLibre == FALSE){ //S'il y a un pion sur la case
 
-    SDL_WM_SetCaption("Jeu de dames", NULL);
+			if(plateauDeJeu.cases[i].pion.couleur == BLANC){ // Si le pion est blanc
+
+				if(plateauDeJeu.cases[i].pion.isDame == FALSE){ // Si le pion n'est pas une dame
+
+					if(plateauDeJeu.cases[i].pion.isHighlighted == FALSE){ // Si le pion n'est pas sélectionné
+						pionBlanc.surface = SDL_LoadBMP("./img/pions/pionBlanc.bmp");
+						SDL_SetColorKey(pionBlanc.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionBlanc.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionBlanc.surface, NULL, ecran, &pionBlanc.position);
+					}
+					else{
+						pionBlanc.surface = SDL_LoadBMP("./img/pions/pionBlancHighlight.bmp");
+						SDL_SetColorKey(pionBlanc.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionBlanc.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionBlanc.surface, NULL, ecran, &pionBlanc.position);
+					}
+				}
+				else{
+
+					if(plateauDeJeu.cases[i].pion.isHighlighted == FALSE){ //Si la dame n'est pas sélectionnée
+						pionBlanc.surface = SDL_LoadBMP("./img/pions/dameBlanc.bmp");
+						SDL_SetColorKey(pionBlanc.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionBlanc.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionBlanc.surface, NULL, ecran, &pionBlanc.position);
+					}
+					else{
+						pionBlanc.surface = SDL_LoadBMP("./img/pions/dameBlancHighlight.bmp");
+						SDL_SetColorKey(pionBlanc.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionBlanc.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionBlanc.surface, NULL, ecran, &pionBlanc.position);
+					}
+				}
+			}
+
+
+			if(plateauDeJeu.cases[i].pion.couleur == NOIR){
+
+				if(plateauDeJeu.cases[i].pion.isDame == FALSE){
+
+					if(plateauDeJeu.cases[i].pion.isHighlighted == FALSE){
+						pionNoir.surface = SDL_LoadBMP("./img/pions/pionNoir.bmp");
+						SDL_SetColorKey(pionNoir.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionNoir.surface, NULL, ecran, &pionNoir.position);
+					}
+					else{
+						pionNoir.surface = SDL_LoadBMP("./img/pions/pionNoirHighlight.bmp");
+						SDL_SetColorKey(pionNoir.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionNoir.surface, NULL, ecran, &pionNoir.position);
+					}
+				}
+
+				else{
+
+					if(plateauDeJeu.cases[i].pion.isHighlighted == 0){
+						pionNoir.surface = SDL_LoadBMP("./img/pions/dameNoir.bmp");
+						SDL_SetColorKey(pionNoir.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionNoir.surface, NULL, ecran, &pionNoir.position);
+					}
+					else{
+						pionNoir.surface = SDL_LoadBMP("./img/pions/dameNoirHighlight.bmp");
+						SDL_SetColorKey(pionNoir.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir.surface->format, 255, 255, 255));
+						SDL_BlitSurface(pionNoir.surface, NULL, ecran, &pionNoir.position);
+					}
+				}
+			}
+
+		}
+
+	}
+
+	SDL_WM_SetCaption("Jeu de dames", NULL);
+    /* Mise à jour de l'écran et de tout ce qu'il contient. */
     SDL_Flip(ecran);
     gestionEvenements(ecran);
 
-    SDL_FreeSurface(cases[0]);
-    SDL_FreeSurface(cases[1]);
-
     SDL_Quit();
-
-    return EXIT_SUCCESS;
-}*/
+}
 
 int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 {
@@ -167,7 +207,6 @@ int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 					}
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-				    //TODO : démarrer le jeu
 					x = event.button.x;
 					y = event.button.y;
 					for(int i = 0; i < NB_ITEMS_MENU; i ++) {
@@ -176,7 +215,9 @@ int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 						    switch(i){
 
                             case 0 :
-                                //affichePlateauSDL(plateau,ecran);
+                                SDL_FreeSurface(menus[0]);
+                                SDL_FreeSurface(menus[1]);
+                                affichePlateauSDL(ecran);
                                 break;
 
 						    default :

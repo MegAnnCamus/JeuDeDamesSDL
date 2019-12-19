@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1576756669 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1576773679 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -7,6 +7,8 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 	"constantes.h"
+	"structuresLogiques.h"
+	"structuresSDL.h"
 
 1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl.h
 	"SDL_main.h"
@@ -205,16 +207,17 @@
 
 1576755977 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
-1576752336 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
+1576774456 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<string.h>
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
+	"plateau.h"
 	"gestionAffichage.h"
 
-1576756670 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1576773523 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -222,6 +225,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 	"constantes.h"
+	"structuresSDL.h"
 
 1576759833 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
 	<stdio.h>
@@ -233,11 +237,48 @@
 	"constantes.h"
 	"structuresLogiques.h"
 
-1576758546 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
+1576773396 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<string.h>
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
+
+1576790553 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+	"deplacement.h"
+
+1576759384 c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+	"constantes.h"
+	"structuresLogiques.h"
+
+1576756668 c:\users\meg-ann\documents\projets\jeudedamessdl\structuressdl.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+
+1576759891 c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+	"constantes.h"
+	"structuresLogiques.h"
 
