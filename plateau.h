@@ -4,8 +4,7 @@
 #include<string.h>
 #include<SDL/SDL.h>
 #include<SDL/SDL_ttf.h>
-#include"constantes.h"
-#include"structuresLogiques.h"
+#include"deplacement.h"
 
 plateau initPlateau(joueur j1, joueur j2);
 casePlateau getCasePlateau(int x, int y, plateau board);

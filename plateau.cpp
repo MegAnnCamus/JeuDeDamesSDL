@@ -1,14 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include<string.h>
-#include<SDL/SDL.h>
-#include<SDL/SDL_ttf.h>
-#include"deplacement.h"
+#include"plateau.h"
 
 plateau initPlateau(joueur j1, joueur j2){
 
-	int i = 1, x= 2, y= 1;
+	int i = 1;
+	int x= 2;
+	int y= 1;
 	casePlateau caseBlanche = {.x = 0,.y = 0,.couleur = BLANC,.isLibre = TRUE,.notation = 0,.isHighlighted = FALSE};
 
 	//Initialisation tour des joueurs
@@ -30,7 +26,8 @@ plateau initPlateau(joueur j1, joueur j2){
 		c.notation = i;
 		c.couleur = NOIR;
 		c.isHighlighted = FALSE;
-		c.x = x;c.y = y;
+		c.x = x;
+		c.y = y;
 
 		if (i <= 20) { //Côté noir : haut du plateau
 			c.isLibre = FALSE;

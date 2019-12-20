@@ -1,12 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include<string.h>
-#include<SDL/SDL.h>
-#include<SDL/SDL_ttf.h>
-#include"constantes.h"
-#include"structuresLogiques.h"
-#include"structuresSDL.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include"gestionAffichage.h"
 
 extern blackTile caseNoir;
 extern whiteTile caseBlanc;
@@ -19,7 +15,6 @@ void gestionEvenements(SDL_Surface *ecran)
 {
     int continuer = 1;
     SDL_Event event;
-    casePlateau *caseCliquee;
 
     while (continuer)
     {
@@ -29,19 +24,26 @@ void gestionEvenements(SDL_Surface *ecran)
             case SDL_QUIT:
                 continuer = 0;
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                int* coordonnees = clicPlateau(event);
+                fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
+                highlightPionClic(coordonnees);
+                affichePlateauSDL(ecran);
+                break;
         }
-
+        //affichePlateauSDL(ecran);
         SDL_Flip(ecran);
     }
 }
 
 void affichePlateauSDL(SDL_Surface* ecran){
 
-    ecran = SDL_SetVideoMode(TAILLE_ECRAN, TAILLE_ECRAN, 32, SDL_HWSURFACE);
+    ecran = SDL_SetVideoMode(TAILLE_ECRAN_X, TAILLE_ECRAN_Y, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 243, 235, 215));
 	caseNoir.surface = SDL_LoadBMP("./img/cases/caseNoir.bmp");
 	caseHighlight.surface = SDL_LoadBMP("./img/cases/caseHighlight.bmp");
 
+	afficheRightPanel(ecran);
 	for(int i=1;i<=50;i++){
 
         //Affichage des cases du plateau
@@ -113,7 +115,7 @@ void affichePlateauSDL(SDL_Surface* ecran){
 
 				else{
 
-					if(plateauDeJeu.cases[i].pion.isHighlighted == 0){
+					if(plateauDeJeu.cases[i].pion.isHighlighted == FALSE){
 						pionNoir.surface = SDL_LoadBMP("./img/pions/dameNoir.bmp");
 						SDL_SetColorKey(pionNoir.surface, SDL_SRCCOLORKEY, SDL_MapRGB(pionNoir.surface->format, 255, 255, 255));
 						SDL_BlitSurface(pionNoir.surface, NULL, ecran, &pionNoir.position);
@@ -138,6 +140,73 @@ void affichePlateauSDL(SDL_Surface* ecran){
     SDL_Quit();
 }
 
+void afficheRightPanel(SDL_Surface* ecran){
+
+    TTF_Font *fontBig;
+	TTF_Init();
+	fontBig = TTF_OpenFont("./highland-gothic/HighlandGothicFLF.ttf",30);
+
+    TTF_Font *fontSmall;
+	TTF_Init();
+	fontSmall = TTF_OpenFont("./highland-gothic/HighlandGothicFLF.ttf",20);
+
+    const char* labels[NB_ITEMS_PANNEAU] = {"Au tour de : ","Joueur 1 : ", "Joueur 2 : "};
+    SDL_Surface* items[NB_ITEMS_PANNEAU];
+
+    SDL_Color color[2] = {{31, 47, 55},{146, 170, 212}};
+    items[0] = TTF_RenderText_Solid(fontBig,labels[0],color[0]);
+	items[1] = TTF_RenderText_Solid(fontBig,labels[1],color[0]);
+	items[2] = TTF_RenderText_Solid(fontBig,labels[2],color[0]);
+
+	const char* sublabels[NB_ITEMS_PANNEAU] = {"Nom : ","Couleur : ", "Nb pions restants : "};
+	SDL_Surface* subitems[NB_ITEMS_PANNEAU];
+
+    subitems[0] = TTF_RenderText_Solid(fontSmall,sublabels[0],color[0]);
+	subitems[1] = TTF_RenderText_Solid(fontSmall,sublabels[1],color[0]);
+	subitems[2] = TTF_RenderText_Solid(fontSmall,sublabels[2],color[0]);
+
+	SDL_Rect positionsItems[NB_ITEMS_PANNEAU];
+	positionsItems[0].x = 630;
+	positionsItems[0].y = 30;
+	positionsItems[1].x = 630;
+	positionsItems[1].y = 130;
+    positionsItems[2].x = 630;
+	positionsItems[2].y = 330;
+
+    for(int i = 0; i < NB_ITEMS_PANNEAU; i ++) {
+			SDL_BlitSurface(items[i],NULL,ecran,&positionsItems[i]);
+			if(i==1){
+                SDL_Rect positionsSubItems[NB_ITEMS_PANNEAU];
+                positionsSubItems[0].x = 630;
+                positionsSubItems[0].y = 180;
+                positionsSubItems[1].x = 630;
+                positionsSubItems[1].y = 230;
+                positionsSubItems[2].x = 630;
+                positionsSubItems[2].y = 280;
+
+                for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
+                    SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
+
+                }
+            }
+            if(i==2){
+                SDL_Rect positionsSubItems[NB_ITEMS_PANNEAU];
+                positionsSubItems[0].x = 630;
+                positionsSubItems[0].y = 380;
+                positionsSubItems[1].x = 630;
+                positionsSubItems[1].y = 430;
+                positionsSubItems[2].x = 630;
+                positionsSubItems[2].y = 480;
+
+                for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
+                    SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
+
+                }
+            }
+    }
+}
+
+
 int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 {
 
@@ -148,9 +217,9 @@ int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 	SDL_Surface* menus[NB_ITEMS_MENU];
 	int selected[NB_ITEMS_MENU] = {FALSE,FALSE};
 
-	SDL_Color color[2] = {{218, 225, 237},{146, 170, 212}};
+	SDL_Color color[2] = {{31, 47, 55},{146, 170, 212}};
 
-    ecran = SDL_SetVideoMode(TAILLE_ECRAN, TAILLE_ECRAN, 32, SDL_HWSURFACE);
+    ecran = SDL_SetVideoMode(TAILLE_ECRAN_Y, TAILLE_ECRAN_Y, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
 
 	menus[0] = TTF_RenderText_Solid(font,labels[0],color[0]);
@@ -243,7 +312,7 @@ int constructMenu(SDL_Surface* ecran, TTF_Font* font)
 
 void afficheMenuJeu(SDL_Surface *ecran)
 {
-	ecran = SDL_SetVideoMode(TAILLE_ECRAN,TAILLE_ECRAN,32,SDL_SWSURFACE);
+	ecran = SDL_SetVideoMode(TAILLE_ECRAN_Y,TAILLE_ECRAN_Y,32,SDL_SWSURFACE);
 	SDL_WM_SetCaption("Jeu de dames", NULL);
 
 	TTF_Font *font;
@@ -253,5 +322,31 @@ void afficheMenuJeu(SDL_Surface *ecran)
 	int result;
 	result = constructMenu(ecran, font);
 }
+
+int* clicPlateau(SDL_Event evenement){
+	int* tableau = (int*)malloc(2*sizeof(int));
+	int xSouris,ySouris;
+	SDL_Rect positionSouris;
+
+	positionSouris.x = evenement.button.x;
+	positionSouris.y = evenement.button.y;
+	xSouris = positionSouris.x / TAILLE_CASE + 1;
+	ySouris = positionSouris.y / TAILLE_CASE + 1;
+
+	tableau[0] = xSouris;
+	tableau[1] = ySouris;
+	return tableau;
+}
+
+casePlateau highlightPionClic(int *tab){
+	casePlateau c;
+	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
+	//Si c'est bien le joueur en cours
+	if(c.pion.couleur == plateauDeJeu.tour.couleur){
+		plateauDeJeu.cases[c.notation].pion.isHighlighted = TRUE;
+	}
+	return c;
+}
+
 
 

@@ -4,6 +4,7 @@
 #include<string.h>
 #include<SDL/SDL.h>
 #include<SDL/SDL_ttf.h>
+#include"plateau.h"
 #include"constantes.h"
 #include"structuresSDL.h"
 
@@ -12,4 +13,10 @@ int constructMenu(SDL_Surface* ecran, TTF_Font* font);
 void afficheMenuJeu(SDL_Surface* ecran);
 
 //affichage plateau interface graphique
-void affichePlateauSDL();
+void affichePlateauSDL(SDL_Surface* ecran);
+//affichage panneau de droite (infos de jeu)
+void afficheRightPanel(SDL_Surface* ecran);
+
+//gestion clic
+int* clicPlateau(SDL_Event evenement);
+casePlateau highlightPionClic(int *tab);
