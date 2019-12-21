@@ -15,8 +15,8 @@ void afficheMenuJeu(SDL_Surface* ecran);
 //affichage plateau interface graphique
 void affichePlateauSDL(SDL_Surface* ecran);
 //affichage panneau de droite (infos de jeu)
-void afficheRightPanel(SDL_Surface* ecran);
+void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour);
 
 //gestion clic
 int* clicPlateau(SDL_Event evenement);
-casePlateau highlightPionClic(int *tab);
+casePlateau highlightPionClic(int *tab, int light);

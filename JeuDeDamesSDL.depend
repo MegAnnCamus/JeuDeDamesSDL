@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1576851487 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1576924245 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -201,9 +201,9 @@
 	"begin_code.h"
 	"close_code.h"
 
-1576850730 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
+1576931654 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
-1576848757 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
+1576932835 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -212,7 +212,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1576851500 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1576932879 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -226,7 +226,7 @@
 1576837352 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
 	"deplacement.h"
 
-1576773396 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
+1576924245 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -234,7 +234,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1576840448 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
+1576924145 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
 	"plateau.h"
 
 1576759384 c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.h

@@ -10,6 +10,7 @@ extern whiteTile caseHighlight;
 extern whitePawn pionBlanc;
 extern blackPawn pionNoir;
 extern plateau plateauDeJeu;
+extern int nbClic;
 
 void gestionEvenements(SDL_Surface *ecran)
 {
@@ -25,9 +26,16 @@ void gestionEvenements(SDL_Surface *ecran)
                 continuer = 0;
                 break;
             case SDL_MOUSEBUTTONDOWN:
+                nbClic = nbClic % 2;
                 int* coordonnees = clicPlateau(event);
-                fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
-                highlightPionClic(coordonnees);
+                //fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
+                if(nbClic==0){
+                   highlightPionClic(coordonnees,TRUE);
+                }
+                else{
+                    highlightPionClic(coordonnees,FALSE);
+                }
+                nbClic++;
                 affichePlateauSDL(ecran);
                 break;
         }
@@ -43,7 +51,7 @@ void affichePlateauSDL(SDL_Surface* ecran){
 	caseNoir.surface = SDL_LoadBMP("./img/cases/caseNoir.bmp");
 	caseHighlight.surface = SDL_LoadBMP("./img/cases/caseHighlight.bmp");
 
-	afficheRightPanel(ecran);
+	afficheRightPanel(ecran,plateauDeJeu.j1,plateauDeJeu.j2,plateauDeJeu.tour);
 	for(int i=1;i<=50;i++){
 
         //Affichage des cases du plateau
@@ -140,7 +148,7 @@ void affichePlateauSDL(SDL_Surface* ecran){
     SDL_Quit();
 }
 
-void afficheRightPanel(SDL_Surface* ecran){
+void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour){
 
     TTF_Font *fontBig;
 	TTF_Init();
@@ -166,40 +174,96 @@ void afficheRightPanel(SDL_Surface* ecran){
 	subitems[2] = TTF_RenderText_Solid(fontSmall,sublabels[2],color[0]);
 
 	SDL_Rect positionsItems[NB_ITEMS_PANNEAU];
-	positionsItems[0].x = 630;
-	positionsItems[0].y = 30;
-	positionsItems[1].x = 630;
-	positionsItems[1].y = 130;
-    positionsItems[2].x = 630;
-	positionsItems[2].y = 330;
+	//positions gros titres
+	positionsItems[0].x = POS_TXT_PANNEAU;
+	positionsItems[0].y = POS_TITRE_PANNEAU;
+	positionsItems[1].x = POS_TXT_PANNEAU;
+	positionsItems[1].y = POS_TITRE_PANNEAU + 100;
+    positionsItems[2].x = POS_TXT_PANNEAU;
+	positionsItems[2].y = positionsItems[1].y + TAILLE_INFOS_JOUEUR;
+
+	SDL_Surface* couleurEnCours;
+	SDL_Rect positionCouleurEnCours;
+	if(tour.couleur==BLANC)
+        couleurEnCours = SDL_LoadBMP("./img/pions/pionBlanc.bmp");
+    else
+        couleurEnCours = SDL_LoadBMP("./img/pions/pionNoir.bmp");
+
+    SDL_SetColorKey(couleurEnCours, SDL_SRCCOLORKEY, SDL_MapRGB(couleurEnCours->format, 255, 255, 255));
+    positionCouleurEnCours.x = POS_TXT_PANNEAU + 200;
+    positionCouleurEnCours.y = POS_TITRE_PANNEAU - 5;
+    SDL_BlitSurface(couleurEnCours,NULL,ecran,&positionCouleurEnCours);
 
     for(int i = 0; i < NB_ITEMS_PANNEAU; i ++) {
 			SDL_BlitSurface(items[i],NULL,ecran,&positionsItems[i]);
 			if(i==1){
                 SDL_Rect positionsSubItems[NB_ITEMS_PANNEAU];
-                positionsSubItems[0].x = 630;
-                positionsSubItems[0].y = 180;
-                positionsSubItems[1].x = 630;
-                positionsSubItems[1].y = 230;
-                positionsSubItems[2].x = 630;
-                positionsSubItems[2].y = 280;
+                //positions catégories infos joueurs
+                positionsSubItems[0].x = POS_TXT_PANNEAU;
+                positionsSubItems[0].y = positionsItems[1].y + TAILLE_INFOS_JOUEUR/4;
+                positionsSubItems[1].x = POS_TXT_PANNEAU;
+                positionsSubItems[1].y = positionsSubItems[0].y + TAILLE_INFOS_JOUEUR/4;
+                positionsSubItems[2].x = POS_TXT_PANNEAU;
+                positionsSubItems[2].y = positionsSubItems[1].y + TAILLE_INFOS_JOUEUR/4;
+
+                //recup infos sur le joueur 1
+                SDL_Surface* infos[NB_ITEMS_PANNEAU];
+                infos[0] = TTF_RenderText_Solid(fontSmall,j1.nom,color[0]);
+                if(j1.couleur==BLANC)
+                    infos[1] = SDL_LoadBMP("./img/icons/iconBlanc.bmp");
+                else
+                    infos[1] = SDL_LoadBMP("./img/icons/iconNoir.bmp");
+
+                SDL_SetColorKey(infos[1], SDL_SRCCOLORKEY, SDL_MapRGB(infos[1]->format, 255, 255, 255));
+                //TODO : ajouter nb pions et l'afficher
+                infos[2] = TTF_RenderText_Solid(fontSmall,"20",color[0]);
+
+                SDL_Rect positionsInfos[NB_ITEMS_PANNEAU];
+                positionsInfos[0].x = POS_TXT_PANNEAU + 70;
+                positionsInfos[0].y = positionsSubItems[0].y;
+                positionsInfos[1].x = POS_TXT_PANNEAU + 100;
+                positionsInfos[1].y = positionsSubItems[1].y - 10;
+                positionsInfos[2].x = POS_TXT_PANNEAU + 210;
+                positionsInfos[2].y = positionsSubItems[2].y;
 
                 for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
                     SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
+                    SDL_BlitSurface(infos[j],NULL,ecran,&positionsInfos[j]);
 
                 }
             }
             if(i==2){
                 SDL_Rect positionsSubItems[NB_ITEMS_PANNEAU];
-                positionsSubItems[0].x = 630;
-                positionsSubItems[0].y = 380;
-                positionsSubItems[1].x = 630;
-                positionsSubItems[1].y = 430;
-                positionsSubItems[2].x = 630;
-                positionsSubItems[2].y = 480;
+                positionsSubItems[0].x = POS_TXT_PANNEAU;
+                positionsSubItems[0].y = positionsItems[2].y + TAILLE_INFOS_JOUEUR/4;
+                positionsSubItems[1].x = POS_TXT_PANNEAU;
+                positionsSubItems[1].y = positionsSubItems[0].y + TAILLE_INFOS_JOUEUR/4;
+                positionsSubItems[2].x = POS_TXT_PANNEAU;
+                positionsSubItems[2].y = positionsSubItems[1].y + TAILLE_INFOS_JOUEUR/4;
+
+                //recup infos sur le joueur 1
+                SDL_Surface* infos[NB_ITEMS_PANNEAU];
+                infos[0] = TTF_RenderText_Solid(fontSmall,j2.nom,color[0]);
+                if(j2.couleur==BLANC)
+                    infos[1] = SDL_LoadBMP("./img/icons/iconBlanc.bmp");
+                else
+                    infos[1] = SDL_LoadBMP("./img/icons/iconNoir.bmp");
+
+                SDL_SetColorKey(infos[1], SDL_SRCCOLORKEY, SDL_MapRGB(infos[1]->format, 255, 255, 255));
+                //TODO : ajouter nb pions et l'afficher
+                infos[2] = TTF_RenderText_Solid(fontSmall,"20",color[0]);
+
+                SDL_Rect positionsInfos[NB_ITEMS_PANNEAU];
+                positionsInfos[0].x = POS_TXT_PANNEAU + 70;
+                positionsInfos[0].y = positionsSubItems[0].y;
+                positionsInfos[1].x = POS_TXT_PANNEAU + 100;
+                positionsInfos[1].y = positionsSubItems[1].y - 10;
+                positionsInfos[2].x = POS_TXT_PANNEAU + 210;
+                positionsInfos[2].y = positionsSubItems[2].y;
 
                 for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
                     SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
+                    SDL_BlitSurface(infos[j],NULL,ecran,&positionsInfos[j]);
 
                 }
             }
@@ -338,12 +402,12 @@ int* clicPlateau(SDL_Event evenement){
 	return tableau;
 }
 
-casePlateau highlightPionClic(int *tab){
+casePlateau highlightPionClic(int *tab, int light){
 	casePlateau c;
 	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
 	//Si c'est bien le joueur en cours
 	if(c.pion.couleur == plateauDeJeu.tour.couleur){
-		plateauDeJeu.cases[c.notation].pion.isHighlighted = TRUE;
+		plateauDeJeu.cases[c.notation].pion.isHighlighted = light;
 	}
 	return c;
 }
