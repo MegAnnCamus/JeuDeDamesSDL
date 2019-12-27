@@ -12,16 +12,13 @@ whiteTile caseHighlight;
 whitePawn pionBlanc;
 blackPawn pionNoir;
 plateau plateauDeJeu;
+joueur joueur1,joueur2;
 int nbClic = 0;
 
 int main(int argc, char **argv) {
     SDL_Surface *ecran = NULL;
     SDL_Init(SDL_INIT_VIDEO);
-    joueur j1,j2;
-    strcpy(j1.nom, "Jane");
-    strcpy(j2.nom, "Toto");
 
-    plateauDeJeu = initPlateau(j1,j2);
     afficheMenuJeu(ecran);
     return 0;
 }

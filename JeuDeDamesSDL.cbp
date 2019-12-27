@@ -48,6 +48,7 @@
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SDL-1.2.15/lib" />
 		</Linker>
 		<Unit filename="cb.bmp" />
+		<Unit filename="classeSaisieTexte.cpp" />
 		<Unit filename="constantes.h" />
 		<Unit filename="deplacement.cpp" />
 		<Unit filename="deplacement.h" />

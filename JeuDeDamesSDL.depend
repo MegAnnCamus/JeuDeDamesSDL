@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1576924245 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1577443984 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<math.h>
 	"gestionAffichage.h"
+	"classeSaisieTexte.h"
 
 1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl.h
 	"SDL_main.h"
@@ -203,7 +204,7 @@
 
 1576931654 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
-1576932835 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
+1577443085 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -212,7 +213,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1576932879 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1577439663 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -273,5 +274,18 @@
 	<SDL/SDL_ttf.h>
 	"structuresLogiques.h"
 	"structuresSDL.h"
+	"constantes.h"
+
+1577444198 source:c:\users\meg-ann\documents\projets\jeudedamessdl\classesaisietexte.cpp
+	"classeSaisieTexte.h"
+
+1577443515 c:\users\meg-ann\documents\projets\jeudedamessdl\classesaisietexte.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<string>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
 	"constantes.h"
 
