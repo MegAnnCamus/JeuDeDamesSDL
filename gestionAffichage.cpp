@@ -412,6 +412,8 @@ void saisieNom(SDL_Surface *ecran, int gameStart, joueur *player){
     while(quitter == FALSE){
          while( SDL_PollEvent( &event ) ){
             if( nomSaisi == FALSE){
+                SDL_Rect rect = {0,60,TAILLE_ECRAN_X/2,TAILLE_ECRAN_Y/4};
+                SDL_FillRect(ecran, &rect, 0xf3ebd7);
                 nomJoueur.handleInput(event);
 
                 if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) )

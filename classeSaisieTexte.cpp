@@ -72,7 +72,7 @@ void StringInput::handleInput(SDL_Event event)
             //Free the old surface
             SDL_FreeSurface( text );
             //Render a new text surface
-            text = TTF_RenderText_Shaded( fontSmall, str.c_str(), color[0],color[1] );
+            text = TTF_RenderText_Solid( fontSmall, str.c_str(), color[0]);
         }
     }
 }
