@@ -12,6 +12,10 @@
 int constructMenu(SDL_Surface* ecran, TTF_Font* font);
 void afficheMenuJeu(SDL_Surface* ecran);
 
+//Affichage écrans de victoire
+int constructVictoire(SDL_Surface* ecran, TTF_Font* font,int couleurVictorieuse);
+void afficheVictoire(SDL_Surface *ecran, int couleurVictorieuse);
+
 //Pour saisir les noms des joueurs
 void saisieNom(SDL_Surface *ecran, int gameStart, joueur *player);
 

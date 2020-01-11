@@ -111,3 +111,25 @@ void miseAjour(coup coupJoueur, plateau *board) {
 	}
 
 }
+
+int partieTerminee(plateau board){
+    int trouve = FALSE;
+    char couleur;
+    //parcours du damier à la recherche de deux pions de couleur différente
+    for(int i = 1; i <= 50; i++ ) {
+        if(board.cases[i].isLibre == FALSE) {
+            if(trouve == TRUE) {
+                if(couleur != board.cases[i].pion.couleur) {
+                    //On a trouvé deux pions de couleur différente
+                    return 0;
+                }
+            } else {
+                trouve = TRUE;
+                couleur = board.cases[i].pion.couleur;
+            }
+        }
+    }
+    //Si blanc gagne : on retourne 'W' et donc 87
+    //Si noir gagne : on retourne 'B' et donc 66
+    return couleur;
+}

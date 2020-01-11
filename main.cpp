@@ -20,5 +20,6 @@ int main(int argc, char **argv) {
     SDL_Init(SDL_INIT_VIDEO);
 
     afficheMenuJeu(ecran);
+    //afficheVictoire(ecran,87);
     return 0;
 }
