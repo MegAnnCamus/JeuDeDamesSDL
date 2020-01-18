@@ -2,7 +2,7 @@
 
 
 coup* getDeplacementsStandardsPion(const casePlateau c, const plateau board){
-    coup *moves = calloc(3, sizeof(coup));
+    coup *moves = (coup*)calloc(3, sizeof(coup));
 	coup *d = moves;
 	plateau finalBoard = board;
 
@@ -55,7 +55,7 @@ coup* getDeplacementsStandardsPion(const casePlateau c, const plateau board){
 
 
 coup* coupsPossiblesPion(const casePlateau c, const plateau board){
-    coup *cpossibles = calloc(NBCOUPS, sizeof(coup));
+    coup *cpossibles = (coup*)calloc(NB_COUPS_MAX, sizeof(coup));
     plateau finalBoard = board;
     int nbCoup = 0;
 	casePlateau currentCase = c;
@@ -91,7 +91,7 @@ coup* coupsPossiblesPion(const casePlateau c, const plateau board){
 		/* DIAGONALE HAUT GAUCHE */
 		if((aTester.isLibre == FALSE) //si un pion est présent sur la case
 				&& (aTester.pion.couleur == adversaire) //si le pion est de la couleur de l'adversaire
-				&& (isPrenale(aTester.notation,&finalBoard) == TRUE) //si le pion est prenable
+				&& (isPrenable(aTester.notation,&finalBoard) == TRUE) //si le pion est prenable
 				&& ((getCasePlateau(aTester.x-1, aTester.y-1, finalBoard).isLibre == TRUE) //si la case derrière le pion est libre de base...
 						|| coupDansListe(getCasePlateau(aTester.x-1, aTester.y-1, finalBoard),currentCoup.historiqueCases,currentCoup.nbPrises) == TRUE) //...ou que l'on a pris le pion qui se trouvait dessus
 				&& (coupDansListe(aTester, currentCoup.prises, currentCoup.nbPrises) == FALSE) //si l'on est pas déjà passé au dessus du pion à tester (interdit)
@@ -130,7 +130,7 @@ coup* coupsPossiblesPion(const casePlateau c, const plateau board){
 			/* DIAGONALE HAUT DROITE */
 			if((aTester.isLibre == FALSE) //mêmes tests qu'au dessus
 					&& (aTester.pion.couleur == adversaire)
-					&& (isPrenale(aTester.notation,&finalBoard) == TRUE)
+					&& (isPrenable(aTester.notation,&finalBoard) == TRUE)
 					&& ((getCasePlateau(aTester.x+1, aTester.y-1, finalBoard).isLibre == TRUE)
 							|| coupDansListe(getCasePlateau(aTester.x+1, aTester.y-1, finalBoard), currentCoup.historiqueCases, currentCoup.nbPrises) == TRUE)
 					&& (coupDansListe(aTester, currentCoup.prises, currentCoup.nbPrises) == FALSE)
@@ -163,7 +163,7 @@ coup* coupsPossiblesPion(const casePlateau c, const plateau board){
 				/* DIAGONALE BAS GAUCHE */
 				if((aTester.isLibre == FALSE) //mêmes tests qu'au dessus
 						&& (aTester.pion.couleur == adversaire)
-						&& (isPrenale(aTester.notation,&finalBoard) == TRUE)
+						&& (isPrenable(aTester.notation,&finalBoard) == TRUE)
 						&& ((getCasePlateau(aTester.x-1, aTester.y+1, finalBoard).isLibre == TRUE)
 								|| coupDansListe(getCasePlateau(aTester.x-1, aTester.y+1, finalBoard),currentCoup.historiqueCases,currentCoup.nbPrises) == TRUE)
 						&& (coupDansListe(aTester, currentCoup.prises, currentCoup.nbPrises) == FALSE)
@@ -195,7 +195,7 @@ coup* coupsPossiblesPion(const casePlateau c, const plateau board){
 					/* DIAGONALE BAS DROITE */
 					if((aTester.isLibre == FALSE) //mêmes tests qu'au dessus
 							&& (aTester.pion.couleur == adversaire)
-							&& (isPrenale(aTester.notation,&finalBoard) == TRUE)
+							&& (isPrenable(aTester.notation,&finalBoard) == TRUE)
 							&& ((getCasePlateau(aTester.x+1, aTester.y+1, finalBoard).isLibre == TRUE)
 									|| coupDansListe(getCasePlateau(aTester.x+1, aTester.y+1, finalBoard),currentCoup.historiqueCases,currentCoup.nbPrises) == TRUE)
 							&& (coupDansListe(aTester, currentCoup.prises, currentCoup.nbPrises) == FALSE)
@@ -260,9 +260,4 @@ coup* coupsPossiblesPion(const casePlateau c, const plateau board){
 
 }
 
-coup* getCoupsPossiblesJoueur(const joueur j, const plateau board){
-
-
-
-
-}
+//coup* getCoupsPossiblesJoueur(const joueur j, const plateau board){}

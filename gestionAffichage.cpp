@@ -30,8 +30,14 @@ void gestionEvenements(SDL_Surface *ecran)
             case SDL_MOUSEBUTTONDOWN:
                 nbClic = nbClic % 2;
                 int* coordonnees = clicPlateau(event);
+                casePlateau c = highlightPionClic(coordonnees);
                 //fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
-                highlightPionClic(coordonnees);
+                coup* coupsPossibles = getDeplacementsStandardsPion(getCasePlateau(coordonnees[0],coordonnees[1],plateauDeJeu));
+                //TODO : highlight les cases des coups possibles
+                //TODO : adapter avec les variables déclarées dans moteur.h
+                //si possible les mettre dans le main et les déclarer en extern dans moteur.c
+                //les nommer : nomdebaseMAIN
+                //les déclarer en extern ici aussi
                 nbClic++;
                 affichePlateauSDL(ecran);
                 break;
@@ -613,6 +619,3 @@ void resetHighlight(){
         plateauDeJeu.cases[i].isHighlighted = FALSE;
     }
 }
-
-
-

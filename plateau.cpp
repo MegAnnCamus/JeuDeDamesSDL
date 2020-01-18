@@ -145,3 +145,12 @@ int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe) {
 	}
 	return resultat;
 }
+
+int nombreCoupsDansListe(coup *liste){
+    int cpt = 0;
+	while ((liste->oldCase != 0) && (liste->newcase != 0)) {
+		cpt++;
+		liste++;
+	}
+	return cpt;
+}

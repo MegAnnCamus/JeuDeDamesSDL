@@ -20,3 +20,5 @@ int partieTerminee(plateau board);
 
 //teste si la case c est dans liste
 int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe);
+//retourne le nombre de coups dans la liste
+int nombreCoupsDansListe(coup *liste);
