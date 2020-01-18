@@ -6,7 +6,6 @@
 /** Le plateau de jeu qui sera utilisé tout au long de la partie. (Ne pas utiliser en dehors de moteur.c, utilisez ::get_plateau()) */
 plateau p_jeu;
 
-
 //Initialise une nouvelle partie, par défaut une partie 2 joueurs
 //le joueur pourra ensuite être piloté par l'IA en changeant son type grâce à la fonction ::set_joueur_est_humain.
 
