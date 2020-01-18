@@ -599,5 +599,20 @@ casePlateau highlightPionClic(int *tab){
 	return c;
 }
 
+casePlateau highlightCase(int *tab){
+    casePlateau c;
+	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
+	for(int i=1;i<=50;i++){
+        if(i==c.notation)
+            plateauDeJeu.cases[i].isHighlighted = TRUE;
+    }
+}
+
+void resetHighlight(){
+    for(int i=1;i<=50;i++){
+        plateauDeJeu.cases[i].isHighlighted = FALSE;
+    }
+}
+
 
 

@@ -29,3 +29,11 @@ int prendrePion(int position, plateau *board) {
 		return 1;
 	}
 }
+
+int isPrenable(int position, plateau board){
+    if ((position < 1) || (position > 50) || (board->cases[position].isLibre==TRUE)) {
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}

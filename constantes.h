@@ -18,4 +18,7 @@
 #define NOIR 'B'
 #define BLANC 'W'
 
+#define NB_COUPS_MAX 2000
+#define NB_DEPLACEMENTS 2
+
 
