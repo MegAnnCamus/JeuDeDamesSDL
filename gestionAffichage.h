@@ -24,6 +24,11 @@ void affichePlateauSDL(SDL_Surface* ecran);
 //affichage panneau de droite (infos de jeu)
 void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour);
 
-//gestion clic
+//récup coordonnées du clic
 int* clicPlateau(SDL_Event evenement);
+//sélection du pion cliqué
 casePlateau highlightPionClic(int *tab);
+//mise en surbrillance d'une case
+casePlateau highlightCase(int *tab);
+//à appeler à chaque clic sur un nouveau pion
+void resetHighlight();
