@@ -17,3 +17,6 @@ void miseAjour(coup coupJoueur, plateau *board);
 
 //pour déterminer si la partie est terminée
 int partieTerminee(plateau board);
+
+//teste si la case c est dans liste
+int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe);

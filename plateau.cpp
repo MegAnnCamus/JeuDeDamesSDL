@@ -133,3 +133,15 @@ int partieTerminee(plateau board){
     //Si noir gagne : on retourne 'B' et donc 66
     return couleur;
 }
+
+int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe) {
+	int resultat = FALSE;
+	for (int i = 0; i < tailleListe - 1; ++i) {
+		if (liste[i].notation == c.notation) {
+			fprintf(stdout,"La case %d est dans la liste.\n", c.notation);
+			resultat = TRUE;
+			break;
+		}
+	}
+	return resultat;
+}
