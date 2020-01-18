@@ -1,0 +1,3 @@
+Case hors plateau (13,8)
+Case hors plateau (14,9)
+Case hors plateau (14,2)
