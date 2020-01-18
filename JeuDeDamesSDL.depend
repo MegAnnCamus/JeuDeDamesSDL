@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1578740104 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1579298504 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -202,9 +202,9 @@
 	"begin_code.h"
 	"close_code.h"
 
-1576931654 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
+1579299541 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
-1578740134 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
+1578740254 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -213,7 +213,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1578739799 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1579298961 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -224,7 +224,7 @@
 	"constantes.h"
 	"structuresSDL.h"
 
-1576837352 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
+1579340089 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
 	"deplacement.h"
 
 1576924245 c:\users\meg-ann\documents\projets\jeudedamessdl\structureslogiques.h
@@ -235,10 +235,10 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1578739189 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
+1579341076 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
 	"plateau.h"
 
-1576759384 c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.h
+1579340081 c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -256,7 +256,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1578738439 c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.h
+1579340951 c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -289,6 +289,7 @@
 	<SDL/SDL_ttf.h>
 	"constantes.h"
 
+<<<<<<< HEAD
 1579291672 source:d:\travail\travail esiee\c\jeudedamessdl\classesaisietexte.cpp
 	"classeSaisieTexte.h"
 
@@ -371,5 +372,15 @@
 	"gestionAffichage.h"
 
 1579291672 source:d:\travail\travail esiee\c\jeudedamessdl\plateau.cpp
+=======
+1579345878 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.cpp
+	"gestionCoup.h"
+
+1579345289 c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<string.h>
+>>>>>>> master
 	"plateau.h"
 
