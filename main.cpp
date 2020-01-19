@@ -24,6 +24,8 @@ coup* coupsPossiblesMain;
 int caseDepartMain;
 //pour vérifier si on clique sur le même pion que l'on vient de déplacer
 int caseIntermediaireMain;
+//pour savoir si le coup joué est valide
+int coupOkMain;
 
 int main(int argc, char **argv) {
     SDL_Surface *ecran = NULL;

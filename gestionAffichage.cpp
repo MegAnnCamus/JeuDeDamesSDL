@@ -13,6 +13,12 @@ extern plateau plateauDeJeu;
 extern int nbClic;
 extern joueur joueur1,joueur2;
 
+extern int coupEnCoursMain;
+extern coup* coupsPossiblesMain;
+extern int caseDepartMain;
+extern int caseIntermediaireMain;
+extern int coupOkMain;
+
 void gestionEvenements(SDL_Surface *ecran)
 {
     int continuer = 1;
@@ -27,17 +33,121 @@ void gestionEvenements(SDL_Surface *ecran)
                 continuer = 0;
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                nbClic = nbClic % 2;
-                int* coordonnees = clicPlateau(event);
-                casePlateau c = highlightPionClic(coordonnees);
-                //fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
-                coup* coupsPossibles = getDeplacementsStandardsPion(c,plateauDeJeu);
-                //TODO : highlight les cases des coups possibles
-                //TODO : adapter avec les variables déclarées dans moteur.h
-                //si possible les mettre dans le main et les déclarer en extern dans moteur.c
-                //les nommer : nomdebaseMAIN
-                //les déclarer en extern ici aussi
-                nbClic++;
+                /*TOUR DU JOUEUR 1*/
+                if(plateauDeJeu.tour == joueur1){
+                    nbClic = nbClic % 2; //premier ou deuxième clic
+                    if(nbClic == 0){ //premier clic
+                        if(coupEnCoursMain == FALSE){
+                            int tour = commencerTour();
+                            coupEnCoursMain = TRUE;
+                        }
+                        //recup coordonées du clic
+                        int* coordonnees1 = clicPlateau(event);
+                        fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees1[0],coordonnees1[1]);
+                        casePlateau c = highlightPionClic(coordonnees1);
+                        caseDepartMain = getCasePlateau(coordonnees1[0],coordonnees1[1], plateauDeJeu);
+                        //deplacements possibles avec le pion sélectionné
+                        int clickOk = showDeplacementsPossibles(c.notation);
+                        fprintf(stdout, "Premier click OK \n");
+
+                        if (clickOk == TRUE) {
+                            nbClic += 1; //on peut faire le second clic
+                        }
+                        //mise à jour de l'affichage
+                        affichePlateauSDL(ecran);
+                    }
+                    else{
+                        if(nbClic == 1){ //second clic
+                            int* coordonnees2 = clicPlateau(event);
+                            fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees2[0],coordonnees2[1]);
+                            caseIntermediaireMain = getCasePlateau(coordonnees2[0],coordonnees2[1], plateauDeJeu);
+                            coupOkMain = jouerCoup(caseDepartMain, caseIntermediaireMain); //On joue le coup
+                            //mise à jour de l'affichage
+                            affichePlateauSDL(ecran);
+
+                            switch (coupOkMain) {
+                                case 0:
+                                    plateauDeJeu.tour = joueur1;
+                                    fprintf(stdout,"Joueur 1 garde la main. \n");
+                                    break;
+                                case 1:
+                                    plateauDeJeu.tour = joueur2;
+                                    fprintf(stdout,"Au tour de joueur 2. \n");
+                                    coupEnCoursMain = FALSE;
+                                    break;
+                                case 2:
+                                    plateauDeJeu.tour = joueur1;
+                                    fprintf(stdout,"Joueur 1 garde la main. \n");
+                                    break;
+                                }
+                                if (partieTerminee() == FALSE) {
+                                    printf("Deuxieme clic OK \n");
+                                    nbclick += 1;
+                                } else {
+                                    //le joueur 1 vient de gagner grâce à son dernier coup
+                                    afficheVictoire(ecran,joueur1.couleur);
+                                }
+                        }
+                    }
+
+                }/*TOUR DU JOUEUR 1*/
+                else{
+                                        nbClic = nbClic % 2; //premier ou deuxième clic
+                    if(nbClic == 0){ //premier clic
+                        if(coupEnCoursMain == FALSE){
+                            int tour = commencerTour();
+                            coupEnCoursMain = TRUE;
+                        }
+                        //recup coordonées du clic
+                        int* coordonnees1 = clicPlateau(event);
+                        fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees1[0],coordonnees1[1]);
+                        casePlateau c = highlightPionClic(coordonnees1);
+                        caseDepartMain = getCasePlateau(coordonnees1[0],coordonnees1[1], plateauDeJeu);
+                        //deplacements possibles avec le pion sélectionné
+                        int clickOk = showDeplacementsPossibles(c.notation);
+                        fprintf(stdout, "Premier click OK \n");
+
+                        if (clickOk == TRUE) {
+                            nbClic += 1; //on peut faire le second clic
+                        }
+                        //mise à jour de l'affichage
+                        affichePlateauSDL(ecran);
+                    }
+                    else{
+                        if(nbClic == 1){ //second clic
+                            int* coordonnees2 = clicPlateau(event);
+                            fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees2[0],coordonnees2[1]);
+                            caseIntermediaireMain = getCasePlateau(coordonnees2[0],coordonnees2[1], plateauDeJeu);
+                            coupOkMain = jouerCoup(caseDepartMain, caseIntermediaireMain); //On joue le coup
+                            //mise à jour de l'affichage
+                            affichePlateauSDL(ecran);
+
+                            switch (coupOkMain) {
+                                case 0:
+                                    plateauDeJeu.tour = joueur2;
+                                    fprintf(stdout,"Joueur 2 garde la main. \n");
+                                    break;
+                                case 1:
+                                    plateauDeJeu.tour = joueur1;
+                                    fprintf(stdout,"Au tour de joueur 1. \n");
+                                    coupEnCoursMain = FALSE;
+                                    break;
+                                case 2:
+                                    plateauDeJeu.tour = joueur2;
+                                    fprintf(stdout,"Joueur 2 garde la main. \n");
+                                    break;
+                                }
+                                if (partieTerminee() == FALSE) {
+                                    printf("Deuxieme clic OK \n");
+                                    nbclick += 1;
+                                } else {
+                                    //le joueur 2 vient de gagner grâce à son dernier coup
+                                    afficheVictoire(ecran,joueur2.couleur);
+                                }
+                        }
+                    }
+
+                }
                 affichePlateauSDL(ecran);
                 break;
         }
