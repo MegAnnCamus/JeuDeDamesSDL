@@ -3,7 +3,7 @@
 #define MINIMUM -1
 #define MAXIMUM 1
 
-#include "fonction_evaluation.h"
+#include "fonctionEvaluation.h"
 
 //brief Renvoie le meilleur coup que peut jouer le joueur courant.
 //param profondeur La profondeur à laquelle on doit utiliser la fonction d'évaluation. (profondeur > 0)

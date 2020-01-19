@@ -12,11 +12,11 @@ coup jouerIA(const plateau p, int profondeur) {
 	double alpha = MINIMUM;
 	double beta = MAXIMUM;
 	coup res;
-	coup * coups_possibles = getCoupsMax(getCoups(p.tour,p));
+	coup * coupPossibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
 
 	int i = 0;
 	coup c;
-	int nbCoups = nombre_coups(coups_possibles);
+	int nbCoups = nombreCoupsDansListe(coups_possibles);
 
 	if(nbCoups == 1) {
 		return coups_possibles[0];
@@ -25,7 +25,7 @@ coup jouerIA(const plateau p, int profondeur) {
 	while ( i < nbCoups) { // On parcours la liste des coups possibles
 		c = coups_possibles[i];
 		plateau new_p = p;
-		plateau_appliquer_coup(c,&new_p);
+		miseAjour(c,&new_p);
 		double tmp = min(new_p, profondeur - 1,alpha,beta);
 		if (tmp > alpha) { // si le coup est meilleur que le précedent, on le garde
 			alpha = tmp;
@@ -38,19 +38,19 @@ coup jouerIA(const plateau p, int profondeur) {
 
 double max(const plateau p, int profondeur, double alpha, double beta) {
 
-	if (plateau_partie_finie(p) || profondeur == 0) { /* si on arrive à la profondeur max ou que la partie est gangée/perdue, on renvoie l'évaluation */
+	if (partieTerminee(p) || profondeur == 0) { /* si on arrive à la profondeur max ou que la partie est gangée/perdue, on renvoie l'évaluation */
 
-		return fct_eval(&p);
+		return fctEval(&p);
 	} else {
-		coup * coups_possibles = getCoupsMax(getCoups(p.tour,p));
+		coup * coups_possibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
 
 		int i = 0;
 		coup c;
-		int nbCoups = nombre_coups(coups_possibles);
+		int nbCoups = nombreCoupsDansListe(coups_possibles);
 		while (i < nbCoups) { /* On parcours la liste des coups possibles */
 			c = coups_possibles[i];
 			plateau new_p = p;
-			plateau_appliquer_coup(c,&new_p);
+			miseAjour(c,&new_p);
 			alpha = maximum(alpha,min(new_p, profondeur - 1,alpha,beta));
 
 			if (beta <= alpha) { /* si le coup est meilleur que le précedent, on le garde */
@@ -65,19 +65,19 @@ double max(const plateau p, int profondeur, double alpha, double beta) {
 }
 
 double min(const plateau p, int profondeur, double alpha, double beta) {
-	if (plateau_partie_finie(p) || profondeur == 0) { /* si on arrive à la profondeur max, on renvoie l'évaluation */
-		return fct_eval(&p);
+	if (partieTerminee(p) || profondeur == 0) { /* si on arrive à la profondeur max, on renvoie l'évaluation */
+		return fctEval(&p);
 	} else {
-		coup * coups_possibles = getCoupsMax(getCoups(p.tour,p));
+		coup * coups_possibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
 
 		int i = 0;
 		coup c;
-		int nbCoups = nombre_coups(coups_possibles);
+		int nbCoups = nombreCoupsDansListe(coups_possibles);
 		while ( i < nbCoups ) { /* On parcours la liste des coups possibles */
 			printf("evaluation min du coup : %i\n",i);
 			c  = coups_possibles[i];
 			plateau new_p = p;
-			plateau_appliquer_coup(c,&new_p);
+			miseAjour(c,&new_p);
 			beta = minimum(beta, max(new_p, profondeur - 1,alpha,beta));
 			if (alpha >= beta) { /* coupure beta */
 				return beta;
