@@ -32,7 +32,7 @@ typedef struct plateau{
 	casePlateau cases[51];
 	joueur j1;
 	joueur j2;
-	joueur tour; //joueur qui doit jouer le prochain coup
+	char tour; //couleur du joueur qui doit jouer le prochain coup
 } plateau;
 
 typedef struct coup{

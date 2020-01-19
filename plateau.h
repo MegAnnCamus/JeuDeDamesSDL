@@ -4,13 +4,27 @@
 #include<string.h>
 #include<SDL/SDL.h>
 #include<SDL/SDL_ttf.h>
+#include"constantes.h"
+#include"classeSaisieTexte.h"
+#include"structuresSDL.h"
 #include"deplacement.h"
+
+extern blackTile caseNoir;
+extern whiteTile caseBlanc;
+extern whiteTile caseHighlight;
+extern whitePawn pionBlanc;
+extern blackPawn pionNoir;
+extern plateau plateauDeJeu;
+extern int nbClic;
+extern joueur joueur1,joueur2;
 
 //initialisation du plateau en début de partie
 plateau initPlateau(joueur j1, joueur j2);
 
 //case plateau selon coordonées cliquées
 casePlateau getCasePlateau(int x, int y, plateau board);
+//reoturne le joueur qui est en train de jouer
+joueur getJoueurPlateau(plateau board);
 
 //mise à jour du plateau après un coup
 void miseAjour(coup coupJoueur, plateau *board);

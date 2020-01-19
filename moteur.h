@@ -13,9 +13,6 @@ int jouerCoupCoordonnees(int x1, int y1, int x2, int y2);
 //Joue sur la profondeur d'évaluation du min-max.
 void setDifficulte(int i);
 
-//débute un nouveau tour
-int commencerTour();
-
 //highlight les cases sur lesquelles on peut se déplacer en partant de c
 int showDeplacementsPossibles(int c);
 //idem qu'au dessus mais prend en paramètres les coordonnées de la case

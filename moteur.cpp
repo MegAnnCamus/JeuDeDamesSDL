@@ -1,12 +1,13 @@
 #include "moteur.h"
 
-extern plateau plateauDeJeu;
-
-extern int coupEnCoursMain;
-extern coup* coupsPossiblesMain;
-extern int caseDepartMain;
-extern int caseIntermediaireMain;
-
+//pour savoir si un joueur est en train de réaliser une action
+int coupEnCoursMain = FALSE;
+//liste des coups possibles
+coup* coupsPossiblesMain;
+//case de départ d'une rafle
+int caseDepartMain;
+//pour vérifier si on clique sur le même pion que l'on vient de déplacer
+int caseIntermediaireMain;
 //profondeur de l'alogirthme MinMax
 int difficulte = 1;
 
@@ -90,19 +91,6 @@ int jouerCoupCoordonnees(int x1, int y1, int x2, int y2) {
 int showDeplacementsPossiblesCoordonnees(int x, int y) {
 	casePlateau c = getCasePlateau(x, y, plateauDeJeu);
 	return showDeplacementsPossibles(c.notation);
-}
-
-int commencerTour() {
-	if (coupEnCoursMain == FALSE) {
-		coupsPossiblesMain = getCoupsMax(getCoups(plateauDeJeu.tour, plateauDeJeu)); //màj de la liste des coups possibles
-		if (nombreCoupsDansListe(coupsPossiblesMain) == 0) { // si on ne peut pas jouer, on passe la main.
-			if(plateauDeJeu.tour.couleur == plateauDeJeu.j1.couleur)
-				plateauDeJeu.tour = plateauDeJeu.j2;
-			else
-				plateauDeJeu.tour = plateauDeJeu.j1;
-			return 1;
-		}
-	}
 }
 
 int showDeplacementsPossibles(int c) {

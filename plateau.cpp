@@ -1,7 +1,5 @@
 #include"plateau.h"
 
-extern plateau plateauDeJeu;
-
 plateau initPlateau(joueur j1, joueur j2){
 
 	int i = 1;
@@ -16,7 +14,7 @@ plateau initPlateau(joueur j1, joueur j2){
 	plateau board;
 	board.j1 = j1;
 	board.j2 = j2;
-	board.tour = j1;
+	board.tour = BLANC;
 
 	board.cases[0] = caseBlanche;
 
@@ -84,6 +82,15 @@ casePlateau getCasePlateau(int x, int y, plateau board) {
 	}
 }
 
+joueur getJoueurPlateau(plateau board){
+    if(board.tour == BLANC){
+        return board.j1;
+    }
+    else{
+        return board.j2;
+    }
+}
+
 void miseAjour(coup coupJoueur, plateau *board) {
 	casePlateau *cases = board->cases;
 	if((cases[coupJoueur.oldCase].isLibre==TRUE) || (cases[coupJoueur.newCase].isLibre==FALSE)) {
@@ -105,10 +112,10 @@ void miseAjour(coup coupJoueur, plateau *board) {
 			board->cases[coupJoueur.newCase].pion.isDame = TRUE;
 		}
         //Changement tour
-		if(board->tour.couleur == board->j1.couleur) {
-			board->tour = board->j2;
+		if(board->tour == board->j1.couleur) {
+			board->tour = board->j2.couleur;
 		} else {
-			board->tour = board->j1;
+			board->tour = board->j1.couleur;
 		}
 	}
 
@@ -166,7 +173,7 @@ casePlateau highlightPionClic(int *tab){
             plateauDeJeu.cases[i].pion.isHighlighted = FALSE;
     }
     //Si c'est bien le joueur en cours
-	if(c.pion.couleur == plateauDeJeu.tour.couleur){
+	if(c.pion.couleur == plateauDeJeu.tour){
         if(plateauDeJeu.cases[c.notation].pion.isHighlighted == TRUE)
             plateauDeJeu.cases[c.notation].pion.isHighlighted = FALSE;
         else

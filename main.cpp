@@ -13,24 +13,19 @@ whitePawn pionBlanc;
 blackPawn pionNoir;
 plateau plateauDeJeu;
 joueur joueur1,joueur2;
-
 //pour savoir si premier ou deuxième clic
-int nbClic = 0;
-//pour savoir si un joueur est en train de réaliser une action
-int coupEnCoursMain = FALSE;
-//liste des coups possibles
-coup* coupsPossiblesMain;
-//case de départ d'une rafle
-int caseDepartMain;
-//pour vérifier si on clique sur le même pion que l'on vient de déplacer
-int caseIntermediaireMain;
+int nbClic;
+//pour savoir si un tour est en cours
+int tourEnCoursMain;
 //pour savoir si le coup joué est valide
 int coupOkMain;
 
 int main(int argc, char **argv) {
     SDL_Surface *ecran = NULL;
     SDL_Init(SDL_INIT_VIDEO);
-
+    nbClic = 0;
+    coupOkMain = 0;
+    tourEnCoursMain = FALSE;
     afficheMenuJeu(ecran);
     //afficheVictoire(ecran,'B');
     return 0;
