@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include"gestionAffichage.h"
-#include"classeSaisieTexte.h"
 
 extern blackTile caseNoir;
 extern whiteTile caseBlanc;
@@ -32,7 +31,7 @@ void gestionEvenements(SDL_Surface *ecran)
                 int* coordonnees = clicPlateau(event);
                 casePlateau c = highlightPionClic(coordonnees);
                 //fprintf(stdout,"Coordonnees sur la grille = (%d,%d)\n",coordonnees[0],coordonnees[1]);
-                coup* coupsPossibles = getDeplacementsStandardsPion(getCasePlateau(coordonnees[0],coordonnees[1],plateauDeJeu));
+                coup* coupsPossibles = getDeplacementsStandardsPion(c,plateauDeJeu);
                 //TODO : highlight les cases des coups possibles
                 //TODO : adapter avec les variables déclarées dans moteur.h
                 //si possible les mettre dans le main et les déclarer en extern dans moteur.c
@@ -585,37 +584,4 @@ int* clicPlateau(SDL_Event evenement){
 	tableau[0] = xSouris;
 	tableau[1] = ySouris;
 	return tableau;
-}
-
-casePlateau highlightPionClic(int *tab){
-	casePlateau c;
-	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
-	//On déselectionne tous les pions
-	for(int i=1;i<=50;i++){
-        if(i!=c.notation)
-            plateauDeJeu.cases[i].pion.isHighlighted = FALSE;
-    }
-    //Si c'est bien le joueur en cours
-	if(c.pion.couleur == plateauDeJeu.tour.couleur){
-        if(plateauDeJeu.cases[c.notation].pion.isHighlighted == TRUE)
-            plateauDeJeu.cases[c.notation].pion.isHighlighted = FALSE;
-        else
-            plateauDeJeu.cases[c.notation].pion.isHighlighted = TRUE;
-	}
-	return c;
-}
-
-casePlateau highlightCase(int *tab){
-    casePlateau c;
-	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
-	for(int i=1;i<=50;i++){
-        if(i==c.notation)
-            plateauDeJeu.cases[i].isHighlighted = TRUE;
-    }
-}
-
-void resetHighlight(){
-    for(int i=1;i<=50;i++){
-        plateauDeJeu.cases[i].isHighlighted = FALSE;
-    }
 }

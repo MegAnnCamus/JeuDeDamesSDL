@@ -1,11 +1,10 @@
 # depslib dependency file v1.0
-1579378982 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
+1579425321 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<math.h>
 	"gestionAffichage.h"
-	"classeSaisieTexte.h"
 
 1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl.h
 	"SDL_main.h"
@@ -204,7 +203,7 @@
 
 1579299541 c:\users\meg-ann\documents\projets\jeudedamessdl\constantes.h
 
-1578740254 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
+1579385519 source:c:\users\meg-ann\documents\projets\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -213,15 +212,16 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1579298961 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
+1579424196 c:\users\meg-ann\documents\projets\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<string.h>
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
-	"plateau.h"
+	"gestionCoup.h"
 	"constantes.h"
+	"classeSaisieTexte.h"
 	"structuresSDL.h"
 
 1579378982 source:c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.cpp
@@ -235,7 +235,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1579378982 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
+1579425202 source:c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.cpp
 	"plateau.h"
 
 1579378982 c:\users\meg-ann\documents\projets\jeudedamessdl\deplacement.h
@@ -256,7 +256,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1579378982 c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.h
+1579425180 c:\users\meg-ann\documents\projets\jeudedamessdl\plateau.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -377,13 +377,18 @@
 1579378982 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.cpp
 	"gestionCoup.h"
 
-1579378982 c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.h
+1579388867 c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.h
 	<stdio.h>
 	<stdlib.h>
 	<stddef.h>
 	<string.h>
-	"plateau.h"
+	"moteur.h"
 
 1579345289 ter
+	"plateau.h"
+
+1579388014 c:\users\meg-ann\documents\projets\jeudedamessdl\moteur.h
+	<stdio.h>
+	<stdlib.h>
 	"plateau.h"
 

@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "plateau.h"
+#include "moteur.h"
 
 //liste de coups possibles pour le pion sur la case c
 coup* coupsPossiblesPion(const casePlateau c, const plateau board);

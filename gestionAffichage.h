@@ -4,8 +4,9 @@
 #include<string.h>
 #include<SDL/SDL.h>
 #include<SDL/SDL_ttf.h>
-#include"plateau.h"
+#include"gestionCoup.h"
 #include"constantes.h"
+#include"classeSaisieTexte.h"
 #include"structuresSDL.h"
 
 //Gestion du menu
@@ -26,9 +27,3 @@ void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour);
 
 //récup coordonnées du clic
 int* clicPlateau(SDL_Event evenement);
-//sélection du pion cliqué
-casePlateau highlightPionClic(int *tab);
-//mise en surbrillance d'une case
-casePlateau highlightCase(int *tab);
-//à appeler à chaque clic sur un nouveau pion
-void resetHighlight();

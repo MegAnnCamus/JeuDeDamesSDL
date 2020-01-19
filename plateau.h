@@ -22,3 +22,10 @@ int partieTerminee(plateau board);
 int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe);
 //retourne le nombre de coups dans la liste
 int nombreCoupsDansListe(coup *liste);
+
+//sélection du pion cliqué
+casePlateau highlightPionClic(int *tab);
+//mise en surbrillance d'une case
+void highlightCase(int c, plateau *board);
+//reset la surbrillance des cases
+void resetHighlight(plateau* board);

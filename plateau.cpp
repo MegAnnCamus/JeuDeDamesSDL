@@ -1,5 +1,7 @@
 #include"plateau.h"
 
+extern plateau plateauDeJeu;
+
 plateau initPlateau(joueur j1, joueur j2){
 
 	int i = 1;
@@ -148,9 +150,40 @@ int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe) {
 
 int nombreCoupsDansListe(coup *liste){
     int cpt = 0;
-	while ((liste->oldCase != 0) && (liste->newcase != 0)) {
+	while ((liste->oldCase != 0) && (liste->newCase != 0)) {
 		cpt++;
 		liste++;
 	}
 	return cpt;
+}
+
+casePlateau highlightPionClic(int *tab){
+	casePlateau c;
+	c = getCasePlateau(tab[0], tab[1], plateauDeJeu);
+	//On déselectionne tous les pions
+	for(int i=1;i<=50;i++){
+        if(i!=c.notation)
+            plateauDeJeu.cases[i].pion.isHighlighted = FALSE;
+    }
+    //Si c'est bien le joueur en cours
+	if(c.pion.couleur == plateauDeJeu.tour.couleur){
+        if(plateauDeJeu.cases[c.notation].pion.isHighlighted == TRUE)
+            plateauDeJeu.cases[c.notation].pion.isHighlighted = FALSE;
+        else
+            plateauDeJeu.cases[c.notation].pion.isHighlighted = TRUE;
+	}
+	return c;
+}
+
+void highlightCase(int c, plateau* board){
+	for(int i=1;i<=50;i++){
+        if(i==c)
+            board->cases[i].isHighlighted = TRUE;
+    }
+}
+
+void resetHighlight(plateau* board){
+    for(int i=1;i<=50;i++){
+        board->cases[i].isHighlighted = FALSE;
+    }
 }
