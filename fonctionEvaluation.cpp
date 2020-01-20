@@ -30,16 +30,16 @@ int valeurCase(const plateau * p, const casePlateau * c){
 }
 
 int rang(const casePlateau * c){
-	int res = (c->notation_officielle - 1) / 5; //on retrouve la ligne sur laquelle se trouve le pion.
-	if(c->pion.couleur == noir) return res; //apres, son rang depend de sa couleur.
+	int res = (c->notation - 1) / 5; //on retrouve la ligne sur laquelle se trouve le pion.
+	if(c->pion.couleur == NOIR) return res; //apres, son rang depend de sa couleur.
 	return 8 - res;
 }
 
 int est_isole(const plateau * p, const casePlateau * c, int rang){
-	int n = c->notation_officielle;
+	int n = c->notation;
 	if(rang == 0 || n % 10 == 5 || n % 10 == 6) return 0; //si le pion est sur un bord, il n'est pas considere comme isole.
 	int s; //signe
-	if((rang % 2 == 1 && c->pion.couleur == blanc) || (rang % 2 == 0 && c->pion.couleur == noir)){
+	if((rang % 2 == 1 && c->pion.couleur == BLANC) || (rang % 2 == 0 && c->pion.couleur == NOIR)){
 		s = -1;
 	}else{
 		s = 1;

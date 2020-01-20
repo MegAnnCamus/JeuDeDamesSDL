@@ -16,14 +16,14 @@ coup jouerIA(const plateau p, int profondeur) {
 
 	int i = 0;
 	coup c;
-	int nbCoups = nombreCoupsDansListe(coups_possibles);
+	int nbCoups = nombreCoupsDansListe(coupPossibles);
 
 	if(nbCoups == 1) {
-		return coups_possibles[0];
+		return coupPossibles[0];
 	}
 
 	while ( i < nbCoups) { // On parcours la liste des coups possibles
-		c = coups_possibles[i];
+		c = coupPossibles[i];
 		plateau new_p = p;
 		miseAjour(c,&new_p);
 		double tmp = min(new_p, profondeur - 1,alpha,beta);
@@ -42,13 +42,13 @@ double max(const plateau p, int profondeur, double alpha, double beta) {
 
 		return fctEval(&p);
 	} else {
-		coup * coups_possibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
+		coup * coupPossibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
 
 		int i = 0;
 		coup c;
-		int nbCoups = nombreCoupsDansListe(coups_possibles);
+		int nbCoups = nombreCoupsDansListe(coupPossibles);
 		while (i < nbCoups) { /* On parcours la liste des coups possibles */
-			c = coups_possibles[i];
+			c = coupPossibles[i];
 			plateau new_p = p;
 			miseAjour(c,&new_p);
 			alpha = maximum(alpha,min(new_p, profondeur - 1,alpha,beta));
@@ -58,7 +58,7 @@ double max(const plateau p, int profondeur, double alpha, double beta) {
 			}
 			i++;
 		}
-		free(coups_possibles);
+		free(coupPossibles);
 		return alpha;
 	}
 
@@ -68,14 +68,14 @@ double min(const plateau p, int profondeur, double alpha, double beta) {
 	if (partieTerminee(p) || profondeur == 0) { /* si on arrive à la profondeur max, on renvoie l'évaluation */
 		return fctEval(&p);
 	} else {
-		coup * coups_possibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
+		coup * coupPossibles = getCoupsMax(getCoupsPossiblesJoueur(p.tour,p));
 
 		int i = 0;
 		coup c;
-		int nbCoups = nombreCoupsDansListe(coups_possibles);
+		int nbCoups = nombreCoupsDansListe(coupPossibles);
 		while ( i < nbCoups ) { /* On parcours la liste des coups possibles */
 			printf("evaluation min du coup : %i\n",i);
-			c  = coups_possibles[i];
+			c  = coupPossibles[i];
 			plateau new_p = p;
 			miseAjour(c,&new_p);
 			beta = minimum(beta, max(new_p, profondeur - 1,alpha,beta));
@@ -84,7 +84,7 @@ double min(const plateau p, int profondeur, double alpha, double beta) {
 			}
 			i++;
 		}
-		free(coups_possibles);
+		free(coupPossibles);
 		return beta;
 	}
 
