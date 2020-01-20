@@ -53,15 +53,11 @@
 		<Unit filename="constantes.h" />
 		<Unit filename="deplacement.cpp" />
 		<Unit filename="deplacement.h" />
-		<Unit filename="fonctionEvaluation.cpp" />
-		<Unit filename="fonctionEvaluation.h" />
 		<Unit filename="gestionAffichage.cpp" />
 		<Unit filename="gestionAffichage.h" />
 		<Unit filename="gestionCoup.cpp" />
 		<Unit filename="gestionCoup.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="min-max.cpp" />
-		<Unit filename="min-max.h" />
 		<Unit filename="moteur.cpp" />
 		<Unit filename="moteur.h" />
 		<Unit filename="plateau.cpp" />

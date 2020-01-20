@@ -11,7 +11,7 @@ double fctEval(const plateau *p){
 		if(!p->cases[i].isLibre){ //si elle est occupee
 			val = valeurCase(p, &(p->cases[i])); //on calcule sa valeur
 			denominateur += val;
-			if(p->cases[i].pion.couleur == p->tour.couleur){ //on ajoute ou soustrait la valeur selon le joueur auquel appartient le pion.
+			if(p->cases[i].pion.couleur == p->tour){ //on ajoute ou soustrait la valeur selon le joueur auquel appartient le pion.
 				total += val;
 			}else{
 				total -= val;
@@ -35,7 +35,7 @@ int rang(const casePlateau * c){
 	return 8 - res;
 }
 
-int est_isole(const plateau * p, const casePlateau * c, int rang){
+int estIsole(const plateau * p, const casePlateau * c, int rang){
 	int n = c->notation;
 	if(rang == 0 || n % 10 == 5 || n % 10 == 6) return 0; //si le pion est sur un bord, il n'est pas considere comme isole.
 	int s; //signe
