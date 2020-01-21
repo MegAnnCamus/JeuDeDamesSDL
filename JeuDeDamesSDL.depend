@@ -6,7 +6,7 @@
 	<math.h>
 	"gestionAffichage.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_audio.h"
@@ -25,14 +25,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_main.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_stdinc.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -58,7 +58,7 @@
 	<stdlib.h>
 	"close_code.h"
 
-1326110987 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_config.h
+1326110988 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_config.h
 	"SDL_platform.h"
 	"SDL_config_dreamcast.h"
 	"SDL_config_macos.h"
@@ -68,16 +68,16 @@
 	"SDL_config_os2.h"
 	"SDL_config_minimal.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_platform.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_platform.h
 
 1326110994 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_config_win32.h
 	"SDL_platform.h"
 
 1326111000 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\begin_code.h
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\close_code.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\close_code.h
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_audio.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -87,24 +87,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_error.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_endian.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_mutex.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_thread.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_mutex.h"
@@ -112,24 +112,24 @@
 	<process.h>
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_rwops.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_cdrom.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_cdrom.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_cpuinfo.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_events.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_active.h"
@@ -140,63 +140,63 @@
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_active.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_active.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_keyboard.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keysym.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_keysym.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_keysym.h
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_mouse.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_video.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_joystick.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_quit.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_loadso.h
-	"SDL_stdinc.h"
-	"SDL_error.h"
-	"begin_code.h"
-	"close_code.h"
-
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_timer.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1325738639 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_version.h
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1576435871 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_ttf.h
+1576435872 c:\program files (x86)\codeblocks\sdl-1.2.15\include\sdl\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -291,10 +291,10 @@
 
 1577443515 D
 
-1579377281 source:d:\travail\travail esiee\c\jeudedamessdl\classesaisietexte.cpp
+1579602097 source:d:\travail\travail esiee\c\jeudedamessdl\classesaisietexte.cpp
 	"classeSaisieTexte.h"
 
-1579377281 d:\travail\travail esiee\c\jeudedamessdl\classesaisietexte.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\classesaisietexte.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -304,12 +304,12 @@
 	<SDL/SDL_ttf.h>
 	"constantes.h"
 
-1579377281 d:\travail\travail esiee\c\jeudedamessdl\constantes.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\constantes.h
 
-1579379790 source:d:\travail\travail esiee\c\jeudedamessdl\deplacement.cpp
+1579602610 source:d:\travail\travail esiee\c\jeudedamessdl\deplacement.cpp
 	"deplacement.h"
 
-1579379790 d:\travail\travail esiee\c\jeudedamessdl\deplacement.h
+1579602097 d:\travail\travail esiee\c\jeudedamessdl\deplacement.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -319,7 +319,7 @@
 	"constantes.h"
 	"structuresLogiques.h"
 
-1579461949 d:\travail\travail esiee\c\jeudedamessdl\structureslogiques.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\structureslogiques.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -327,14 +327,14 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1579461949 source:d:\travail\travail esiee\c\jeudedamessdl\gestionaffichage.cpp
+1579600922 source:d:\travail\travail esiee\c\jeudedamessdl\gestionaffichage.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<math.h>
 	"gestionAffichage.h"
 
-1579461948 d:\travail\travail esiee\c\jeudedamessdl\gestionaffichage.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\gestionaffichage.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -343,7 +343,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionCoup.h"
 
-1579461949 d:\travail\travail esiee\c\jeudedamessdl\plateau.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\plateau.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -355,7 +355,7 @@
 	"structuresSDL.h"
 	"deplacement.h"
 
-1579377282 d:\travail\travail esiee\c\jeudedamessdl\structuressdl.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\structuressdl.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -363,7 +363,7 @@
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
-1579461949 source:d:\travail\travail esiee\c\jeudedamessdl\main.cpp
+1579601442 source:d:\travail\travail esiee\c\jeudedamessdl\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -372,7 +372,7 @@
 	<SDL/SDL_ttf.h>
 	"gestionAffichage.h"
 
-1579461949 source:d:\travail\travail esiee\c\jeudedamessdl\plateau.cpp
+1579600922 source:d:\travail\travail esiee\c\jeudedamessdl\plateau.cpp
 	"plateau.h"
 
 1579558742 source:c:\users\meg-ann\documents\projets\jeudedamessdl\gestioncoup.cpp
@@ -397,10 +397,10 @@
 
 1579388014 
 
-1579548056 source:d:\travail\travail esiee\c\jeudedamessdl\gestioncoup.cpp
+1579603642 source:d:\travail\travail esiee\c\jeudedamessdl\gestioncoup.cpp
 	"gestionCoup.h"
 
-1579461948 d:\travail\travail esiee\c\jeudedamessdl\gestioncoup.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\gestioncoup.h
 	<stdio.h>
 	<stdlib.h>
 	<stddef.h>
@@ -410,7 +410,7 @@
 1579379790 shed changes
 	"plateau.h"
 
-1579461949 d:\travail\travail esiee\c\jeudedamessdl\moteur.h
+1579600922 d:\travail\travail esiee\c\jeudedamessdl\moteur.h
 	<stdio.h>
 	<stdlib.h>
 	"plateau.h"
@@ -418,7 +418,7 @@
 1579453298 source:c:\users\meg-ann\documents\projets\jeudedamessdl\moteur.cpp
 	"moteur.h"
 
-1579461949 source:d:\travail\travail esiee\c\jeudedamessdl\moteur.cpp
+1579600922 source:d:\travail\travail esiee\c\jeudedamessdl\moteur.cpp
 	"moteur.h"
 
 1579600025 source:c:\users\meg-ann\documents\projets\jeudedamessdl\fonctionevaluation.cpp

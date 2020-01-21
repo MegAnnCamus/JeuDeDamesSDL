@@ -8,5 +8,7 @@
 #include"structuresLogiques.h"
 
 int deplacerPion(int oldPosition, int newPosition, plateau *board);
+
 int prendrePion(int position, plateau *board);
+
 int isPrenable(int position, plateau *board);
