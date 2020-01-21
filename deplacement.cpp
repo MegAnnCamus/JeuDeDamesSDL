@@ -1,5 +1,7 @@
 #include"deplacement.h"
 
+
+//Test les conditions de base de déplacement des pions
 int deplacerPion(int oldPosition, int newPosition, plateau *board) {
     //Deplacement impossible
 	if ((oldPosition < 1) || (oldPosition > 50) || (newPosition < 1)
@@ -20,6 +22,7 @@ int deplacerPion(int oldPosition, int newPosition, plateau *board) {
 	}
 }
 
+//Fonction de base de prise des pions
 int prendrePion(int position, plateau *board) {
 	if ((position < 1) || (position > 50) || (board->cases[position].isLibre==TRUE)) {
 		return 0;
@@ -30,6 +33,8 @@ int prendrePion(int position, plateau *board) {
 	}
 }
 
+
+//Vérifications de base de prise des pions
 int isPrenable(int position, plateau *board){
     if ((position < 1) || (position > 50) || (board->cases[position].isLibre==TRUE)) {
 		return FALSE;
