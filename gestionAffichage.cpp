@@ -35,12 +35,12 @@ void gestionEvenements(SDL_Surface *ecran)
                         }
                         //recup coordonées du clic
                         int* coordonnees11 = clicPlateau(event);
-                        fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees11[0],coordonnees11[1]);
+                        //fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees11[0],coordonnees11[1]);
                         casePlateau c11 = getCasePlateau(coordonnees11[0],coordonnees11[1], plateauDeJeu);
                         caseDepartMain = c11.notation;
                         //deplacements possibles avec le pion sélectionné
                         int clickOk = showDeplacementsPossibles(c11.notation);
-                        fprintf(stdout, "Premier click OK \n");
+                        //fprintf(stdout, "Premier click OK \n");
 
                         if (clickOk == TRUE) {
                             nbClic += 1; //on peut faire le second clic
@@ -52,28 +52,28 @@ void gestionEvenements(SDL_Surface *ecran)
                     else{
                         if(nbClic == 1){ //second clic
                             int* coordonnees12 = clicPlateau(event);
-                            fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees12[0],coordonnees12[1]);
+                            //fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees12[0],coordonnees12[1]);
                             casePlateau c12 = getCasePlateau(coordonnees12[0],coordonnees12[1], plateauDeJeu);
                             caseIntermediaireMain = c12.notation;
-                             fprintf(stdout,"Resultat du coup allant de la case %d à la case %d\n",caseDepartMain,caseIntermediaireMain);
+                            //fprintf(stdout,"Resultat du coup allant de la case %d à la case %d\n",caseDepartMain,caseIntermediaireMain);
                             coupOkMain = jouerCoup(caseDepartMain, caseIntermediaireMain); //On joue le coup
-                            fprintf(stdout,"Resultat du coup allant de la case %d à la case %d = (%d)\n",caseDepartMain,caseIntermediaireMain,coupOkMain);
+                            //fprintf(stdout,"Resultat du coup allant de la case %d à la case %d = (%d)\n",caseDepartMain,caseIntermediaireMain,coupOkMain);
                             //mise à jour de l'affichage
                             //affichePlateauSDL(ecran);
 
                             switch (coupOkMain) {
                                 case 0:
                                     plateauDeJeu.tour = BLANC;
-                                    fprintf(stdout,"Joueur 1 garde la main. \n");
+                                    //fprintf(stdout,"Joueur 1 garde la main. \n");
                                     break;
                                 case 1:
                                     plateauDeJeu.tour = NOIR;
-                                    fprintf(stdout,"Au tour de joueur 2. \n");
+                                    //fprintf(stdout,"Au tour de joueur 2. \n");
                                     tourEnCoursMain = FALSE;
                                     break;
                                 case 2:
                                     plateauDeJeu.tour = BLANC;
-                                    fprintf(stdout,"Joueur 1 garde la main. \n");
+                                    //fprintf(stdout,"Joueur 1 garde la main. \n");
                                     break;
                                 }
                                 if (partieTerminee(plateauDeJeu) == FALSE) {
@@ -97,12 +97,12 @@ void gestionEvenements(SDL_Surface *ecran)
                         }
                         //recup coordonées du clic
                         int* coordonnees21 = clicPlateau(event);
-                        fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees21[0],coordonnees21[1]);
+                        //fprintf(stdout,"Coordonnees sur la grille clic 1 = (%d,%d)\n",coordonnees21[0],coordonnees21[1]);
                         casePlateau c21 = getCasePlateau(coordonnees21[0],coordonnees21[1], plateauDeJeu);
                         caseDepartMain = c21.notation;
                         //deplacements possibles avec le pion sélectionné
                         int clickOk = showDeplacementsPossibles(c21.notation);
-                        fprintf(stdout, "Premier click OK \n");
+                        //fprintf(stdout, "Premier click OK \n");
 
                         if (clickOk == TRUE) {
                             nbClic += 1; //on peut faire le second clic
@@ -114,7 +114,7 @@ void gestionEvenements(SDL_Surface *ecran)
                     else{
                         if(nbClic == 1){ //second clic
                             int* coordonnees22 = clicPlateau(event);
-                            fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees22[0],coordonnees22[1]);
+                            //fprintf(stdout,"Coordonnees sur la grille clic 2 = (%d,%d)\n",coordonnees22[0],coordonnees22[1]);
                             casePlateau c22 = getCasePlateau(coordonnees22[0],coordonnees22[1], plateauDeJeu);
                             caseIntermediaireMain = c22.notation;
                             coupOkMain = jouerCoup(caseDepartMain, caseIntermediaireMain); //On joue le coup
@@ -124,16 +124,16 @@ void gestionEvenements(SDL_Surface *ecran)
                             switch (coupOkMain) {
                                 case 0:
                                     plateauDeJeu.tour = NOIR;
-                                    fprintf(stdout,"Joueur 2 garde la main. \n");
+                                    //fprintf(stdout,"Joueur 2 garde la main. \n");
                                     break;
                                 case 1:
                                     plateauDeJeu.tour = BLANC;
-                                    fprintf(stdout,"Au tour de joueur 1. \n");
+                                    //fprintf(stdout,"Au tour de joueur 1. \n");
                                     tourEnCoursMain = FALSE;
                                     break;
                                 case 2:
                                     plateauDeJeu.tour = NOIR;
-                                    fprintf(stdout,"Joueur 2 garde la main. \n");
+                                    //fprintf(stdout,"Joueur 2 garde la main. \n");
                                     break;
                                 }
                                 if (partieTerminee(plateauDeJeu) == FALSE) {
@@ -147,16 +147,18 @@ void gestionEvenements(SDL_Surface *ecran)
                         }
                     }
                 }/*TOUR DU JOUEUR 2 FIN*/
+
+                //Faire des free
                 affichePlateauSDL(ecran);
                 break;
         }
-        //affichePlateauSDL(ecran);
         SDL_Flip(ecran);
     }
 }
 
 void affichePlateauSDL(SDL_Surface* ecran){
 
+    SDL_FreeSurface(ecran);
     ecran = SDL_SetVideoMode(TAILLE_ECRAN_X, TAILLE_ECRAN_Y, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 243, 235, 215));
 	caseNoir.surface = SDL_LoadBMP("./img/cases/caseNoir.bmp");
@@ -337,7 +339,7 @@ void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour){
                 positionsInfos[2].x = POS_TXT_PANNEAU + 210;
                 positionsInfos[2].y = positionsSubItems[2].y;
 
-                for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
+                for(int j = 0; j < NB_ITEMS_PANNEAU-1; j ++) {
                     SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
                     SDL_BlitSurface(infos[j],NULL,ecran,&positionsInfos[j]);
 
@@ -372,7 +374,7 @@ void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour){
                 positionsInfos[2].x = POS_TXT_PANNEAU + 210;
                 positionsInfos[2].y = positionsSubItems[2].y;
 
-                for(int j = 0; j < NB_ITEMS_PANNEAU; j ++) {
+                for(int j = 0; j < NB_ITEMS_PANNEAU-1; j ++) {
                     SDL_BlitSurface(subitems[j],NULL,ecran,&positionsSubItems[j]);
                     SDL_BlitSurface(infos[j],NULL,ecran,&positionsInfos[j]);
 

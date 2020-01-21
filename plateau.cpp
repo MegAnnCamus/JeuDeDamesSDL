@@ -63,7 +63,7 @@ plateau initPlateau(joueur j1, joueur j2){
 
 casePlateau getCasePlateau(int x, int y, plateau board) {
 	if (x < 1 || x > 10 || y < 1 || y > 10) {
-		fprintf(stderr, "Case hors plateau (%i,%i)\n", x, y);
+		//fprintf(stderr, "Case hors plateau (%i,%i)\n", x, y);
 		return board.cases[0];
 	}
 	//Clic sur case blanche
@@ -94,7 +94,7 @@ joueur getJoueurPlateau(plateau board){
 void miseAjour(coup coupJoueur, plateau *board) {
 	casePlateau *cases = board->cases;
 	if((cases[coupJoueur.oldCase].isLibre==TRUE) || (cases[coupJoueur.newCase].isLibre==FALSE)) {
-		fprintf(stderr, "Impossible de jouer le coup");
+		//fprintf(stderr, "Impossible de jouer le coup");
 	}
 	else
     {
@@ -147,7 +147,7 @@ int coupDansListe(casePlateau c, casePlateau *liste, int tailleListe) {
 	int resultat = FALSE;
 	for (int i = 0; i < tailleListe - 1; ++i) {
 		if (liste[i].notation == c.notation) {
-			fprintf(stdout,"La case %d est dans la liste.\n", c.notation);
+			//fprintf(stdout,"La case %d est dans la liste.\n", c.notation);
 			resultat = TRUE;
 			break;
 		}
