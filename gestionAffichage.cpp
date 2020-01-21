@@ -47,7 +47,6 @@ void gestionEvenements(SDL_Surface *ecran)
                             casePlateau c = highlightPionClic(coordonnees11);
                         }
                         //mise à jour de l'affichage
-                        //affichePlateauSDL(ecran);
                     }
                     else{
                         if(nbClic == 1){ //second clic
@@ -58,8 +57,6 @@ void gestionEvenements(SDL_Surface *ecran)
                             //fprintf(stdout,"Resultat du coup allant de la case %d à la case %d\n",caseDepartMain,caseIntermediaireMain);
                             coupOkMain = jouerCoup(caseDepartMain, caseIntermediaireMain); //On joue le coup
                             //fprintf(stdout,"Resultat du coup allant de la case %d à la case %d = (%d)\n",caseDepartMain,caseIntermediaireMain,coupOkMain);
-                            //mise à jour de l'affichage
-                            //affichePlateauSDL(ecran);
 
                             switch (coupOkMain) {
                                 case 0:
@@ -147,8 +144,6 @@ void gestionEvenements(SDL_Surface *ecran)
                         }
                     }
                 }/*TOUR DU JOUEUR 2 FIN*/
-
-                //Faire des free
                 affichePlateauSDL(ecran);
                 break;
         }
@@ -157,8 +152,12 @@ void gestionEvenements(SDL_Surface *ecran)
 }
 
 void affichePlateauSDL(SDL_Surface* ecran){
-
     SDL_FreeSurface(ecran);
+    SDL_FreeSurface(caseNoir.surface);
+	SDL_FreeSurface(caseHighlight.surface);
+    SDL_FreeSurface(pionNoir.surface);
+	SDL_FreeSurface(pionBlanc.surface);
+
     ecran = SDL_SetVideoMode(TAILLE_ECRAN_X, TAILLE_ECRAN_Y, 32, SDL_HWSURFACE);
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 243, 235, 215));
 	caseNoir.surface = SDL_LoadBMP("./img/cases/caseNoir.bmp");
@@ -248,16 +247,13 @@ void affichePlateauSDL(SDL_Surface* ecran){
 					}
 				}
 			}
-
 		}
-
 	}
-
 	SDL_WM_SetCaption("Jeu de dames", NULL);
     /* Mise à jour de l'écran et de tout ce qu'il contient. */
     SDL_Flip(ecran);
     gestionEvenements(ecran);
-
+    SDL_FreeSurface(ecran);
     SDL_Quit();
 }
 
@@ -328,7 +324,6 @@ void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour){
                     infos[1] = SDL_LoadBMP("./img/icons/iconNoir.bmp");
 
                 SDL_SetColorKey(infos[1], SDL_SRCCOLORKEY, SDL_MapRGB(infos[1]->format, 255, 255, 255));
-                //TODO : ajouter nb pions et l'afficher
                 infos[2] = TTF_RenderText_Solid(fontSmall,"20",color[0]);
 
                 SDL_Rect positionsInfos[NB_ITEMS_PANNEAU];
@@ -363,7 +358,6 @@ void afficheRightPanel(SDL_Surface* ecran, joueur j1, joueur j2, joueur tour){
                     infos[1] = SDL_LoadBMP("./img/icons/iconNoir.bmp");
 
                 SDL_SetColorKey(infos[1], SDL_SRCCOLORKEY, SDL_MapRGB(infos[1]->format, 255, 255, 255));
-                //TODO : ajouter nb pions et l'afficher
                 infos[2] = TTF_RenderText_Solid(fontSmall,"20",color[0]);
 
                 SDL_Rect positionsInfos[NB_ITEMS_PANNEAU];
