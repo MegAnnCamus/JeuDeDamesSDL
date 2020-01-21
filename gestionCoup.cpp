@@ -281,7 +281,7 @@ int getPossibleCasePos(int c, int diag, plateau p) {
 	int y = p.cases[c].y;
 	switch (diag) {
 	case 1:
-		while (x > 0 && y > 0) {
+		while (x > 0 && y > 0) { /*DIAG HAUT GAUCHE*/
 			x--;
 			y--;
 			casePlateau aPrendre = getCasePlateau(x, y, p);
@@ -296,7 +296,7 @@ int getPossibleCasePos(int c, int diag, plateau p) {
 		return 0;
 		break;
 	case 2:
-		while (x <= 10 && y > 0) {
+		while (x <= 10 && y > 0) { /*DIAG HAUT DROITE*/
 			x++;
 			y--;
 			casePlateau aPrendre = getCasePlateau(x, y, p);
@@ -311,7 +311,7 @@ int getPossibleCasePos(int c, int diag, plateau p) {
 		return 0;
 		break;
 	case 3:
-		while (x > 0 && y <= 10) {
+		while (x > 0 && y <= 10) { /*DIAG BAS GAUCHE*/
 			x--;
 			y++;
 			casePlateau aPrendre = getCasePlateau(x, y, p);
@@ -326,7 +326,7 @@ int getPossibleCasePos(int c, int diag, plateau p) {
 		return 0;
 		break;
 	case 4:
-		while (x <= 10 && y <= 10) {
+		while (x <= 10 && y <= 10) { /*DIAG BAS DROITE*/
 			x++;
 			y++;
 			casePlateau aPrendre = getCasePlateau(x, y, p);
@@ -351,16 +351,18 @@ coup * completerCoupDame(const coup c, int mvt, plateau p) {
 	coup * res = (coup*)calloc(100, sizeof(coup));
 	int cpt_res = 0;
 	plateau finalBoard;
-	if (mvt == 1 || mvt == 4) { // si on est dur la diagonale 1-4
+	if (mvt == 1 || mvt == 4) { /*DIAGONALE HAUT GAUCHE OU BAS DROITE*/
 		int diag2 = getPossibleCasePos(c.newCase, 2, p); // on cherche sur les diagonales perpendiculaires
 		int diag3 = getPossibleCasePos(c.newCase, 3, p);
-		if (diag2) { // si on peut prendre un pion sur la diagonale 2
+		if (diag2!=0) { // si on peut prendre un pion sur la diagonale haut droite
 			casePlateau cPrise = p.cases[diag2];
 			int x = cPrise.x + 1;
 			int y = cPrise.y - 1;
-			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
+			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre == TRUE) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
 				coup cp = c;
+				//ajout de la prise au coup
 				cp.prises[cp.nbPrises] = cPrise;
+				//on doit atterrir sur la case après la prise
 				casePlateau newCase = getCasePlateau(x, y, p);
 				cp.nbPrises++;
 				cp.historiqueCases[cp.nbPrises] = newCase;
@@ -374,23 +376,22 @@ coup * completerCoupDame(const coup c, int mvt, plateau p) {
 					prendrePion(cPrise.notation, &finalBoard);
 					deplacerPion(c.newCase,
 							newCase.notation, &finalBoard);
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 2, finalBoard);
-					int nbCoups = nombreCoupsDansListe(coups_completes);
-					int i;
-					for (i = 0; i < nbCoups; i++) {
-						res[cpt_res++] = coups_completes[i];
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
+					for (int i = 0; i < nbCoups; i++) {
+						res[cpt_res++] = coupsCompletes[i];
 					}
 				}
 				x++;
 				y--;
 			}
 		}
-		if (diag3) { // si on peut prendre un pion sur la diagonale 3
+		if (diag3!=0) { // si on peut prendre un pion sur la diagonale bas gauche
 			casePlateau cPrise = p.cases[diag3];
 			int x = cPrise.x - 1;
 			int y = cPrise.y + 1;
-			while (x > 0 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
+			while (x > 0 && y <= 10 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
 				coup cp = c;
 				cp.prises[cp.nbPrises] = cPrise;
 				casePlateau newCase = getCasePlateau(x, y, p);
@@ -405,26 +406,26 @@ coup * completerCoupDame(const coup c, int mvt, plateau p) {
 					prendrePion(cPrise.notation, &finalBoard);
 					deplacerPion(c.newCase,
 							newCase.notation, &finalBoard);
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 3, finalBoard);
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						res[cpt_res++] = coups_completes[i];
+						res[cpt_res++] = coupsCompletes[i];
 					}
 				}
 				x--;
 				y++;
 			}
 		}
-	} else { // sinon on est sur la diagonale 2-3
+	} else { /*DIAGONALE HAUT DROITE OU BAS GAUCHE*/
 		int diag1 = getPossibleCasePos(c.newCase, 1, p); // on cherche sur les diagonales perpendiculaires
 		int diag4 = getPossibleCasePos(c.newCase, 4, p);
-		if (diag1) { // si on peut prendre un pion sur la diagonale 1
+		if (diag1!=FALSE) { // si on peut prendre un pion sur la diagonale 1
 			casePlateau cPrise = p.cases[diag1];
 			int x = cPrise.x - 1;
 			int y = cPrise.y - 1;
-			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
+			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
 				coup cp = c;
 				cp.prises[cp.nbPrises] = cPrise;
 				casePlateau newCase = getCasePlateau(x, y, p);
@@ -438,23 +439,23 @@ coup * completerCoupDame(const coup c, int mvt, plateau p) {
 					prendrePion(cPrise.notation, &finalBoard);
 					deplacerPion(c.newCase,
 							newCase.notation, &finalBoard);
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 1, finalBoard);
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						res[cpt_res++] = coups_completes[i];
+						res[cpt_res++] = coupsCompletes[i];
 					}
 				}
 				x--;
 				y--;
 			}
 		}
-		if (diag4) { // si on peut prendre un pion sur la diagonale 3
+		if (diag4!=FALSE) { // si on peut prendre un pion sur la diagonale 3
 			casePlateau cPrise = p.cases[diag4];
 			int x = cPrise.x + 1;
 			int y = cPrise.y + 1;
-			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
+			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derrière la prise */
 				coup cp = c;
 				cp.prises[cp.nbPrises] = cPrise;
 				casePlateau newCase = getCasePlateau(x, y, p);
@@ -462,18 +463,19 @@ coup * completerCoupDame(const coup c, int mvt, plateau p) {
 				cp.historiqueCases[cp.nbPrises] = newCase;
 				cp.newCase = newCase.notation;
 				res[cpt_res++] = cp;
+
 				if (!(getPossibleCasePos(newCase.notation, 2, p) /* si il n'y a pas d'aures prises sur la diagonale, on ajoute le coup */
 				|| getPossibleCasePos(newCase.notation, 3, p))) {
 					finalBoard = p;
 					prendrePion(cPrise.notation, &finalBoard);
 					deplacerPion(c.newCase,
 							newCase.notation, &finalBoard);
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 4, finalBoard);
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						res[cpt_res++] = coups_completes[i];
+						res[cpt_res++] = coupsCompletes[i];
 					}
 				}
 				x++;
@@ -498,8 +500,7 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 	casePlateau currentCase = c;
 	char adversaire = (c.pion.couleur == BLANC) ? NOIR : BLANC;
 
-
-	/* conditions de d�part */
+	/* conditions de départ */
 	coup currentCoup;
 	currentCoup.oldCase = currentCase.notation;
 	currentCoup.nbPrises = 0;
@@ -507,29 +508,26 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 	currentCoup.historiqueCases[currentCoup.nbPrises++] = currentCase;
 
 	/* pour signaler qu'on est dans une rafle */
-	int nouvelle_rafle = 0;
-	int derniere_recherche_faite = 0; /* lorsqu'on revient sur la case de d�part, on fait une derniere recherche */
-	int fini = 0;
+	int newRafle = FALSE;
+	int derniereRechercheFaite = FALSE; /* lorsqu'on revient sur la case de départ, on fait une derniere recherche */
+	int fini = FALSE;
 	int dernierePosition = 0;
 
-	/* quand on est sur la case de d�part on marque l'element qu'on va visiter
-	 * ainsi on ne reparcours pas une deuxieme fois quand on revient durant le backtrack
-	 */
-	casePlateau to_avoid[5];
-	int cnt_avoid = 0;
+	//cases sur lesquelles il faudra éviter de repasser depuis
+	//on marque la case qu'on va visiter
+	casePlateau casesToAvoid[5];
+	int nbCasesToAvoid = 0;
 
-
-
-	while (!fini) {
-		/* ---------------------- Diagonale 1 ----------------------------- */
-		int case_prise = getPossibleCasePos(c.notation, 1, p);
-		casePlateau case_derriere = getCasePlateau(
-				p.cases[case_prise].x - 1, p.cases[case_prise].y - 1, p);
-		if (!case_prise || !case_derriere.isLibre
-				|| case_derriere.notation == 0) { /* si la diagonale est vide, ou qu'on ne peut pas prendre le pion */
+	while (fini==FALSE) {
+		/*DIAGONALE HAUT GAUCHE*/
+		int casePrise = getPossibleCasePos(c.notation, 1, p);
+		casePlateau caseDerriere = getCasePlateau(
+				p.cases[casePrise].x - 1, p.cases[casePrise].y - 1, p);
+		if (casePrise==FALSE || caseDerriere.isLibre==FALSE
+				|| caseDerriere.notation == 0) { /* si la diagonale est vide, ou qu'on ne peut pas prendre le pion */
 			int x = c.x - 1;
 			int y = c.y - 1;
-			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
+			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre==TRUE) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
 				casePlateau newCase = getCasePlateau(x, y, p);
 				if (newCase.notation != 0) {
 					coup cp;
@@ -543,11 +541,11 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				y--;
 			}
 
-		} else { /* sinon, il y a un pion � prendre sur la diagonale */
-			casePlateau cPrise = p.cases[case_prise];
+		} else { /* sinon, il y a un pion à prendre sur la diagonale */
+			casePlateau cPrise = p.cases[casePrise];
 			int x = cPrise.x - 1;
 			int y = cPrise.y - 1;
-			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
+			while (x > 0 && y > 0 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
 				coup cp;
 				cp.type = PRISE;
 				cp.oldCase = c.notation;
@@ -568,31 +566,29 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				if (getPossibleCasePos(newCase.notation, 2,
 						finalBoard) || getPossibleCasePos(
 						newCase.notation, 3, finalBoard)) { /* si il y a une prise possible sur la diagonale, on l'ajoute � la liste */
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 1, finalBoard);
 
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						cps[nbCoup++] = coups_completes[i];
+						cps[nbCoup++] = coupsCompletes[i];
 					}
-					free(coups_completes);
+					free(coupsCompletes);
 				}
 				x--;
 				y--;
 			}
 		}
-
-		/* ---------------------- Diagonale 2 ----------------------------- */
-
-		case_prise = getPossibleCasePos(c.notation, 2, p);
-		case_derriere = getCasePlateau(p.cases[case_prise].x + 1,
-				p.cases[case_prise].y - 1, p);
-		if (!case_prise || !case_derriere.isLibre
-				|| case_derriere.notation == 0) { /* si la diagonale est vide */
+		/*DIAGONALE HAUT DROITE*/
+		casePrise = getPossibleCasePos(c.notation, 2, p);
+		caseDerriere = getCasePlateau(p.cases[casePrise].x + 1,
+				p.cases[casePrise].y - 1, p);
+		if (casePrise==FALSE || caseDerriere.isLibre==FALSE
+				|| caseDerriere.notation == 0) { /* si la diagonale est vide */
 			int x = c.x + 1;
 			int y = c.y - 1;
-			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
+			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre==TRUE) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
 				casePlateau newCase = getCasePlateau(x, y, p);
 				if (newCase.notation != 0) {
 					coup cp;
@@ -606,11 +602,11 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				y--;
 			}
 
-		} else { /* sinon, il y a un pion � prendre sur la diagonale */
-			casePlateau cPrise = p.cases[case_prise];
+		} else { /* sinon, il y a un pion à prendre sur la diagonale */
+			casePlateau cPrise = p.cases[casePrise];
 			int x = cPrise.x + 1;
 			int y = cPrise.y - 1;
-			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
+			while (x <= 10 && y > 0 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
 				coup cp;
 				cp.type = PRISE;
 				cp.oldCase = c.notation;
@@ -631,28 +627,26 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 						finalBoard) || getPossibleCasePos(
 						newCase.notation, 4, finalBoard)) {
 
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 2, finalBoard);
 
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						cps[nbCoup++] = coups_completes[i];
+						cps[nbCoup++] = coupsCompletes[i];
 					}
-					free(coups_completes);
+					free(coupsCompletes);
 				}
 				x++;
 				y--;
 			}
 		}
-
-		/* ---------------------- Diagonale 3 ----------------------------- */
-
-		case_prise = getPossibleCasePos(c.notation, 3, p);
-		case_derriere = getCasePlateau(p.cases[case_prise].x - 1,
-				p.cases[case_prise].y + 1, p);
-		if (!case_prise || !case_derriere.isLibre
-				|| case_derriere.notation == 0) { /* si la diagonale est vide */
+		/*DIAGONALE BAS GAUCHE*/
+		casePrise = getPossibleCasePos(c.notation, 3, p);
+		caseDerriere = getCasePlateau(p.cases[casePrise].x - 1,
+				p.cases[casePrise].y + 1, p);
+		if (casePrise==FALSE || caseDerriere.isLibre==FALSE
+				|| caseDerriere.notation == 0) { /* si la diagonale est vide */
 			int x = c.x - 1;
 			int y = c.y + 1;
 			while (x > 0 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
@@ -670,10 +664,10 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 			}
 
 		} else { /* sinon, il y a un pion � prendre sur la diagonale */
-			casePlateau cPrise = p.cases[case_prise];
+			casePlateau cPrise = p.cases[casePrise];
 			int x = cPrise.x - 1;
 			int y = cPrise.y + 1;
-			while (x > 0 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
+			while (x > 0 && y <= 10 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
 				coup cp;
 				cp.type = PRISE;
 				cp.oldCase = c.notation;
@@ -693,31 +687,29 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				if (getPossibleCasePos(newCase.notation, 1,
 						finalBoard) || getPossibleCasePos(
 						newCase.notation, 4, finalBoard)) {
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 3, finalBoard);
 
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						cps[nbCoup++] = coups_completes[i];
+						cps[nbCoup++] = coupsCompletes[i];
 					}
-					free(coups_completes);
+					free(coupsCompletes);
 				}
 				x--;
 				y++;
 			}
 		}
-
-		/* ---------------------- Diagonale 4 ----------------------------- */
-
-		case_prise = getPossibleCasePos(c.notation, 4, p);
-		case_derriere = getCasePlateau(p.cases[case_prise].x + 1,
-				p.cases[case_prise].y + 1, p);
-		if (!case_prise || !case_derriere.isLibre
-				|| case_derriere.notation == 0) { /* si la diagonale est vide */
+		/*DIAGONALE BAS DROITE*/
+		casePrise = getPossibleCasePos(c.notation, 4, p);
+		caseDerriere = getCasePlateau(p.cases[casePrise].x + 1,
+				p.cases[casePrise].y + 1, p);
+		if (casePrise==FALSE || caseDerriere.isLibre==FALSE
+				|| caseDerriere.notation == 0) { /* si la diagonale est vide */
 			int x = c.x + 1;
 			int y = c.y + 1;
-			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
+			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre==TRUE) { /* on parcours la diagonale jusqu'au bout ou jusqu'a rencontrer un autre pion. */
 				casePlateau newCase = getCasePlateau(x, y, p);
 				if (newCase.notation != 0) {
 					coup cp;
@@ -731,11 +723,11 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				y++;
 			}
 
-		} else { /* sinon, il y a un pion � prendre sur la diagonale */
-			casePlateau cPrise = p.cases[case_prise];
+		} else { /* sinon, il y a un pion à prendre sur la diagonale */
+			casePlateau cPrise = p.cases[casePrise];
 			int x = cPrise.x + 1;
 			int y = cPrise.y + 1;
-			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
+			while (x <= 10 && y <= 10 && getCasePlateau(x, y, p).isLibre==TRUE) { /* dans ce cas, on parcours les cases de la diagonale derri�re la prise */
 				coup cp;
 				cp.type = PRISE;
 				cp.oldCase = c.notation;
@@ -755,27 +747,24 @@ coup* coupsPossiblesDames(const casePlateau c, const plateau p) {
 				if (getPossibleCasePos(newCase.notation, 2,
 						finalBoard) || getPossibleCasePos(
 						newCase.notation, 3, finalBoard)) { /* si il y a d'aures prises sur la diagonale */
-					coup * coups_completes =
+					coup * coupsCompletes =
 							completerCoupDame(cp, 4, finalBoard);
 
-					int nbCoups = nombreCoupsDansListe(coups_completes);
+					int nbCoups = nombreCoupsDansListe(coupsCompletes);
 					int i;
 					for (i = 0; i < nbCoups; i++) {
-						cps[nbCoup++] = coups_completes[i];
+						cps[nbCoup++] = coupsCompletes[i];
 					}
-					free(coups_completes);
+					free(coupsCompletes);
 				}
 				x++;
 				y++;
 			}
 		}
-
-		fini = 1;
+		fini = TRUE;
 	}
-
 	//free(deplacements);
-
-	/* pour marquer la fin de tableau */
+	/* MARQUAGE DE LA FIN DU TABLEAU*/
 	coup foo;
 	foo.oldCase = 0;
 	foo.newCase = 0;
@@ -795,7 +784,7 @@ coup* getCoupsPossiblesJoueur(const joueur j, const plateau p) {
 		if ((c.isLibre==FALSE) && (c.pion.couleur == j.couleur)) { //si la case contient un pion du joueur j
 			coup * aAjouter;
 			if (c.pion.isDame) {
-				//aAjouter = coupsPossiblesDames(c, p);
+				aAjouter = coupsPossiblesDames(c, p);
 			} else {
 				aAjouter = coupsPossiblesPion(c, p);
 			}
